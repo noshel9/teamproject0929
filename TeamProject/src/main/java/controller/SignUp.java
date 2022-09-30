@@ -21,12 +21,13 @@ public class SignUp extends HttpServlet {
     public SignUp() {
         super();
         // TODO Auto-generated constructor stub
+        
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-    	
+    	if(request.getParameter("memberChk") != null) updateMemberChk(request, response);
 	}
 
 	@Override
@@ -74,9 +75,7 @@ public class SignUp extends HttpServlet {
 				else{	
 					Mdto.setId(id);
 					Mdto.setPass(pw);
-					Mdto.setName(name);
-					Mdto.setAge(Integer.parseInt(age));
-					Mdto.setAddr(addr);
+					Mdto.setName(name);					
 					Mdto.setTel(tel);
 					Mdto.setPwfind(pwfind);
 					Mdao.setMemberDTO(Mdto);	
