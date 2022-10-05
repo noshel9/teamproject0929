@@ -9,37 +9,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-
-
 <body>
-<!-- <p style="margin-top:-12px">
-    <em class="link">
-        <a href="/web/documentation/#CategoryCode" target="_blank">카테고리 코드목록을 보시려면 여기를 클릭하세요!</a>
-    </em>
-</p> -->
+<a href="Map.map?outputmap=outputmap">output 맵</a>
 <div class="map_wrap">
-    <div id="map" style="width:100%;height:200%;position:relative;overflow:hidden; margin: auto;"></div>
+    <div id="map" style="width:100%;height:250%;position:relative;overflow:hidden; margin: auto;"></div>
     <ul id="category">
-<!--         <li id="BK9" data-order="0"> 
-            <span class="category_bg bank"></span>
-            은행
-        </li>       
-        <li id="MT1" data-order="1"> 
-            <span class="category_bg mart"></span>
-            마트
-        </li>  
-        <li id="PM9" data-order="2"> 
-            <span class="category_bg pharmacy"></span>
-            약국
-        </li>  
-        <li id="OL7" data-order="3"> 
-            <span class="category_bg oil"></span>
-            주유소
-        </li>  
-        <li id="CE7" data-order="4"> 
-            <span class="category_bg cafe"></span>
-            카페
-        </li>   -->
         <li id="CS2" data-order="5" class=""> 
             <span class="category_bg store"></span>
             편의점
@@ -344,6 +318,5 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     
 });
 </script>
-<input type="hidden" name="lat" value="">
 </body>
 </html>

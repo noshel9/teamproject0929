@@ -46,11 +46,9 @@ public class UploadDAO extends JDBConnect {
 				dto.setLatitude(rs.getString("Latitude"));
 				dto.setLongitude(rs.getString("longitude"));
 				dto.setMemo(rs.getString("memo"));
-				list.add(dto);
-				
-			}			
-			
-
+				dto.setDate(rs.getString("regidate"));
+				list.add(dto);				
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("회원 조회 실패");

@@ -61,13 +61,24 @@ public class Map extends HttpServlet {
 	}
 	
 	public void dataUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		UploadDAO dao = new UploadDAO();
+		UploadDAO dao = new UploadDAO();		
 		
 		List<UploadDTO> arr =dao.getUpload();		
-		//arr = dao.getUpload();
+		
+//		for(int i=1; i<arr.size(); i++) {			
+//			for(int j=0; j<i; j++ ) {
+//				UploadDTO dto = new UploadDTO();				
+//				if(arr.get(j).getLatitude().equals(arr.get(i).getLatitude()) && arr.get(j).getLongitude().equals(arr.get(i).getLongitude())) {									
+//					dto.setLatitude(arr.get(i).getLatitude());
+//					dto.setLongitude(arr.get(i).getLongitude());
+//					dto.setMemo(arr.get(i).getMemo()+"<br>"+arr.get(j).getMemo());
+//					arr.set(i,dto);  
+//				}
+//			}
+//		}		
 		Gson gson = new Gson();
 		String listJson = gson.toJson(arr).toString();
-		System.out.println(listJson);
+//		System.out.println(listJson);
 		request.setAttribute("UploadDTO", listJson);
 		request.getRequestDispatcher("outputMap.jsp").forward(request, response);
 		dao.close();

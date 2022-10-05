@@ -4,6 +4,7 @@ public class UploadDTO {
 	private String Latitude;
 	private String longitude;
 	private String memo;
+	private String date;
 	
 	public String getLatitude() {
 		return Latitude;
@@ -23,6 +24,13 @@ public class UploadDTO {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
 	
 	
 }
