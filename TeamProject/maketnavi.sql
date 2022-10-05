@@ -1,4 +1,6 @@
-select * from member;
+SELECT * FROM jspwebmarket.member;
+alter table board drop foreign key board_ibfk_1;
+select * from information_schema.table_constraints where table_name = 'board';
 select * from uploaddata;
 
 create table member(
@@ -15,7 +17,26 @@ alter table member add count int;
 create table uploaddata(
 Latitude decimal(21,16) not null,
 longitude decimal(21,16) not null,
-memo varchar(50) not null
+memo varchar(50) not null,
+regidate datetime default(sysdate())
 );
+-- alter table uploaddata add regidate datetime default(sysdate());
+drop table uploaddata;
+	
+SHOW VARIABLES LIKE 'event%';	
+SET GLOBAL event_scheduler = on;
+SELECT * FROM information_schema.events;
+show events;
+drop event uploaddata_reset;
 
-alter table uploaddata add regidate datetime default(sysdate());
+DELIMITER $
+CREATE EVENT uploaddata_reset
+ON 
+SCHEDULE
+EVERY 1 DAY STARTS '2022-10-05 06:30:00'
+DO 
+begin
+truncate uploaddata;
+    END
+    $
+    DELIMITER ;
