@@ -1,6 +1,5 @@
 package membership;
 
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -153,50 +152,6 @@ public class MemberDAO extends JDBConnect{
 		int result = stmt.executeUpdate(sql);
 		if(con != null) con.close(); 
 	}
-	
-	public void upload(String lat, String lon, String memo) throws SQLException {
-		
-		PreparedStatement psmt = null;
-		try {
-			String sql = "insert into uploaddata set Latitude=?,longitude=?,memo=?";
-			psmt = con.prepareStatement(sql);
-			BigDecimal Changelat = new BigDecimal(lat);
-			BigDecimal Changelon = new BigDecimal(lon);
-			psmt.setBigDecimal(1, Changelat);
-			psmt.setBigDecimal(2, Changelon);
-			psmt.setString(3, memo);			
-			psmt.executeUpdate();			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			if(con != null) con.close();
-		}		
-	}
-	
-	public UploadDTO getUpload(String lat, String lon) {		
-		
-		UploadDTO dto = new UploadDTO();
-		String query = "select * from uploaddata where Latitude=? and longitude=?";
-		
-		try {
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, lat);
-			psmt.setString(2, lon);
-			rs = psmt.executeQuery();	
-			
-			if(rs.next()) {
-				dto.setLatitude(rs.getString("Latitude"));
-				dto.setLongitude(rs.getString("longitude"));
-				dto.setMemo(rs.getString("memo"));
-				
-			}			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("회원 조회 실패");
-		}
-		return dto;
-	}
+
 
 }

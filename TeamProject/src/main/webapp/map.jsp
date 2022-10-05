@@ -231,7 +231,7 @@ function removeMarker() {
 function displayPlaceInfo (place) {
     var content = '<div class="overlaybox">' +
                     '   <a class="boxtitle" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>' +
-                    '<form action="Map.map" method="post">'+                    
+                    '<form action="Map.map?inputmap=inputmap" method="post">'+                    
                     '<input type="hidden" name="lat" value="'+place.y+'">'+'<input type="hidden" name="lon" value="'+place.x+'">'+
                     '<input class="form-control" placeholder="내용" type="text" style="width: 80%" name ="memo">' + '<input type="submit" value ="전송">'+
                     '</form>'+
@@ -324,23 +324,23 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     var lat = latlng.getLat();
     var lon = latlng.getLng();
     
-    var iwContent = '<input type="text">', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    var iwContent = '<a class="btn btn-primary" href="Map.map">입력</a>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     iwPosition = new kakao.maps.LatLng(lat, lon), //인포윈도우 표시 위치입니다
     iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
 // 인포윈도우를 생성하고 지도에 표시합니다
-var infowindow = new kakao.maps.InfoWindow({
-    map: map, // 인포윈도우가 표시될 지도
-    position : iwPosition, 
-    content : iwContent,
-    removable : iwRemoveable
+	var infowindow = new kakao.maps.InfoWindow({
+    	map: map, // 인포윈도우가 표시될 지도
+    	position : iwPosition, 
+    	content : iwContent,
+    	removable : iwRemoveable
 });
     
-    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+/*     var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
     message += '경도는 ' + latlng.getLng() + ' 입니다';
     
     var resultDiv = document.getElementById('clickLatlng'); 
-    resultDiv.innerHTML = message;
+    resultDiv.innerHTML = message; */
     
 });
 </script>
