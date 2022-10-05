@@ -288,8 +288,9 @@ marker.setMap(map);
 
 // 지도에 클릭 이벤트를 등록합니다
 // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+var infowindow;
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-    
+	if(infowindow != undefined)infowindow.close();
     // 클릭한 위도, 경도 정보를 가져옵니다 
     var latlng = mouseEvent.latLng; 
     
@@ -303,13 +304,13 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
 // 인포윈도우를 생성하고 지도에 표시합니다
-	var infowindow = new kakao.maps.InfoWindow({
+		infowindow = new kakao.maps.InfoWindow({
     	map: map, // 인포윈도우가 표시될 지도
     	position : iwPosition, 
     	content : iwContent,
     	removable : iwRemoveable
 });
-    
+	
 /*     var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
     message += '경도는 ' + latlng.getLng() + ' 입니다';
     
