@@ -10,12 +10,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="Map.map?outputmap=outputmap">output 맵</a>
+<jsp:include page="menu.jsp" />
 <div class="map_wrap">
     <div id="map" style="width:100%;height:250%;position:relative;overflow:hidden; margin: auto;"></div>
     <ul id="category">
-        <li id="CS2" data-order="5" class=""> 
-            <span class="category_bg store"></span>
+        <li id="CS2" data-order="5" class=""  onclick="onClickCategory();"> 
+            <span class="category_bg store" ></span>
             편의점
         </li>      
     </ul>
@@ -128,7 +128,7 @@ function searchPlaces() {
     placeOverlay.setMap(null);
 
     // 지도에 표시되고 있는 마커를 제거합니다
-    removeMarker();
+   removeMarker();
     
     ps.categorySearch(currCategory, placesSearchCB, {useMapBounds:true}); 
 }
@@ -200,18 +200,14 @@ function removeMarker() {
     }   
     markers = [];
 }
-
+function dpSubmit() {
+	
+}
 // 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
 function displayPlaceInfo (place) {
     var content = '<div class="overlaybox">' +
-                    '   <a class="boxtitle" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>' +
-                    '<form action="Map.map?inputmap=inputmap" method="post">'+                    
-                    '<input type="hidden" name="lat" value="'+place.y+'">'+'<input type="hidden" name="lon" value="'+place.x+'">'+
-                    '<input class="form-control" placeholder="내용" type="text" style="width: 80%" name ="memo">' + '<input type="submit" value ="전송">'+
-                    '</form>'+
-                    '<div>'+                   
-                    '<div>';   
-                    
+                    '   <a class="boxtitle" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>';           
+                 
 	
     if (place.road_address_name) {
         content += '  <li class = "up" style="width : 95%;><span class="title" title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
@@ -219,12 +215,22 @@ function displayPlaceInfo (place) {
     }  else {
         content += '    <span title="' + place.address_name + '">' + place.address_name + '</span>';
     }                
-   
+	content += '<form action="Map.map?inputmap=inputmap" method="post" name="frm">'+                    
+    '<input type="hidden" name="lat" value="'+place.y+'">'+'<input type="hidden" name="lon" value="'+place.x+'">'+
+    '<input type="hidden" name="title" value="'+place.place_name+'">'+
+    '<input class="form-control" placeholder="내용" type="text" style="margin: auto; width: 80%;" name ="memo">' + '<input class="btn btn-primary" type="submit" value ="전송">'+
+    '</form>'+
+    '<div>'+                   
+    '<div>';   
+    
     content += '    <li class ="up" style="width : 95%;"><span class="tel">' + place.phone + '</span></li>' + 
                 '</div>' + 
                 '<div class="after"></div>';
 
+               
+                
     contentNode.innerHTML = content;
+    
     placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
     placeOverlay.setMap(map);  
 }
@@ -277,6 +283,8 @@ function onClickCategory() {
      }    
 } 
 /* changeCategoryClass(); */
+//console.log(document.getElementById("CS2"));
+document.getElementById("CS2").click();
 
 //지도를 클릭한 위치에 표출할 마커입니다
 var marker = new kakao.maps.Marker({ 
@@ -299,25 +307,34 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     var lat = latlng.getLat();
     var lon = latlng.getLng();
     
-    var iwContent = '<a class="btn btn-primary" href="Map.map">입력</a>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    var iwContent ='<form action="Map.map?inputmap=inputmap" method="post">'+
+    	'<input class="form-control" placeholder="편의점명" type="text" name="title">'+
+    	'<input class="form-control" placeholder="내용" type="text" name="memo">'+
+    	'<input type="hidden" name="lat" value="'+lat+'">'+'<input type="hidden" name="lon" value="'+lon+'">'+
+    	'<input type="submit" value ="전송">'+
+    	'</form>'
+    	, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     iwPosition = new kakao.maps.LatLng(lat, lon), //인포윈도우 표시 위치입니다
     iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
+	
+    function panTo() {
+		var moveLatLon = latlng;
+		
+		map.panTo(moveLatLon);
+	}
 // 인포윈도우를 생성하고 지도에 표시합니다
 		infowindow = new kakao.maps.InfoWindow({
     	map: map, // 인포윈도우가 표시될 지도
     	position : iwPosition, 
     	content : iwContent,
     	removable : iwRemoveable
+    	
 });
 	
-/*     var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-    message += '경도는 ' + latlng.getLng() + ' 입니다';
-    
-    var resultDiv = document.getElementById('clickLatlng'); 
-    resultDiv.innerHTML = message; */
+		panTo();
     
 });
 </script>
+
 </body>
 </html>

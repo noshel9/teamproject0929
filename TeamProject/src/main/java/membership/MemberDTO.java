@@ -5,9 +5,8 @@ public class MemberDTO {
 	private String pass;
 	private String name;
 	private String regidate;
-	private String tel;
+	private String address;
 	private String pwfind;	
-	
 	
 	public String getPwfind() {
 		return pwfind;
@@ -15,13 +14,7 @@ public class MemberDTO {
 	public void setPwfind(String pwfind) {
 		this.pwfind = pwfind;
 	}
-
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
+	
 	public String getId() {
 		return id;
 	}
@@ -46,6 +39,11 @@ public class MemberDTO {
 	public void setRegidate(String regidate) {
 		this.regidate = regidate;
 	}
-	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	
 }

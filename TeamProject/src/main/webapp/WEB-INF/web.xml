@@ -3,44 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-<servlet>
-   	<description>Login 서블릿 호출</description>
-    <display-name>Login</display-name>
-    <servlet-name>Login</servlet-name>
-    <servlet-class>controller.Login</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>Login</servlet-name>    
-    <url-pattern>/Login.do</url-pattern>
-</servlet-mapping>
-<servlet>   	
-    <servlet-name>SignUp</servlet-name>
-    <servlet-class>controller.SignUp</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>SignUp</servlet-name>    
-    <url-pattern>/SignUp.up</url-pattern>
-</servlet-mapping>
-<servlet>   	    
-    <servlet-name>MemberAuth</servlet-name>
-    <servlet-class>controller.MemberAuth</servlet-class>
-    <init-param>    	
-    	<param-name>admin_id</param-name>
-    	<param-value>root</param-value>
-    </init-param>
-</servlet>
-<servlet-mapping>
-    <servlet-name>MemberAuth</servlet-name>    
-    <url-pattern>/MemberAuth.mvc</url-pattern>
-</servlet-mapping>
-<servlet>   	
-    <servlet-name>ListModel</servlet-name>
-    <servlet-class>controller.ListModel</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>ListModel</servlet-name>    
-    <url-pattern>/ListModel.li</url-pattern>
-</servlet-mapping>
+<!-- Map function -->
 <servlet>
 	<servlet-name>Map</servlet-name>
     <servlet-class>controller.Map</servlet-class>
@@ -50,7 +13,46 @@
     <url-pattern>/Map.map</url-pattern>
 </servlet-mapping>
 
+<!-- Member controller -->
+<servlet>
+	<servlet-name>loginform</servlet-name>
+	<servlet-class>controller.loginform</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>loginform</servlet-name>
+	<url-pattern>/Member/loginform.do</url-pattern>
+</servlet-mapping>
+<servlet>
+	<servlet-name>addMemberform</servlet-name>
+	<servlet-class>controller.addMemberform</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>addMemberform</servlet-name>
+	<url-pattern>/Member/addMemberform.do</url-pattern>
+</servlet-mapping>
+<servlet>
+	<servlet-name>updateMemberform</servlet-name>
+	<servlet-class>controller.updateMemberform</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>updateMemberform</servlet-name>
+	<url-pattern>/Member/updateMemberform.do</url-pattern>
+</servlet-mapping>
+<servlet>
+	<servlet-name>deleteMemberform</servlet-name>
+	<servlet-class>controller.deleteMemberform</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>deleteMemberform</servlet-name>
+	<url-pattern>/Member/deleteMemberform.do</url-pattern>
+</servlet-mapping>
+<!-- Member controller -->
 
+
+
+
+
+<!-- https security -->
 <security-constraint>
 	<web-resource-collection>
 		<web-resource-name>SSL Forward</web-resource-name>

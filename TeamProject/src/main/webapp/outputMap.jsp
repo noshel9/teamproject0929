@@ -13,15 +13,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="map.jsp">input 맵</a>
+<jsp:include page="menu.jsp" />
 <!-- 지도를 표시할 div 입니다 -->
 <div id="map" style="width:100%;height:100%;"></div>
-
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=def47418c26c1b2e8383afc08b8370c5"></script>
 <%
 String list= request.getAttribute("UploadDTO").toString();
 System.out.println(list);
 %>
+<jsp:include page="InfoWindowStyle.jsp"></jsp:include>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
@@ -30,7 +30,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     };
 
 // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+var map = new kakao.maps.Map(mapContainer, mapOption);
 
 //HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 if (navigator.geolocation) {
@@ -84,11 +84,24 @@ function displayMarker(locPosition, message) {
 var list = <%=request.getAttribute("UploadDTO")%>
 
 // 마커 이미지의 이미지 주소입니다
-var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-     
+var imageSrc = "image/abcd3.png"; 
+
+function reportChk(el) { // 신고 알림
+	var cnt = list[el].count;
+	console.log(el);
+	console.log(cnt);
+	if(cnt>3) alert("신고가 누적되어 삭제되었습니다.");
+	else alert("신고가 완료되었습니다.");
+}
+
+function deleteData() { // 업로드데이터삭제
+	alert("삭제가 완료되었습니다.");
+}
+
+
  for (var i =0; i < list.length; i++) {    
     // 마커 이미지의 이미지 크기 입니다
-    var imageSize = new kakao.maps.Size(24, 35); 
+    var imageSize = new kakao.maps.Size(35, 49); 
     
     // 마커 이미지를 생성합니다    
     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
@@ -102,41 +115,67 @@ var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerS
         clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
     });	
 
-    // 마커에 표시할 인포윈도우를 생성합니다 
+    // 마커에 표시할 인포윈도우를 생성합니다     
+    
     var text = [];
 	for(var j =0; j<i; j++){
-		if(list[i].Latitude == list[j].Latitude && list[i].longitude == list[j].longitude ) text.push("<br>"+list[j].memo+list[j].date+"<a class =\"btn btn-primary btn-sm\" href=\""+"\">삭제</a>") ; 
+		if(list[i].Latitude == list[j].Latitude && list[i].longitude == list[j].longitude ) text.push("<a class =\"btn btn-danger btn-sm\" href=\"Map.map?num="+
+				list[j].num+"&&id="+list[j].id+"&&count="+list[j].count+"\"onclick=\"reportChk("+j+");\">신고</a>" +
+				"<b>"+list[j].memo+"</b>"+list[j].date+
+				"<a class =\"btn btn-primary btn-sm\" href=\"Map.map?num="+list[j].num+"\" onclick=\"deleteData();\">삭제</a>") ; 
 	}	
 	
-    var infowindow = new kakao.maps.CustomOverlay({
-        content: "<span class=\"info-title\">"+list[i].memo+"&nbsp;" +list[i].date +"&nbsp;<a class =\"btn btn-primary btn-sm\" href=\"\">삭제</a>" + text.reverse().join("")+"</span>",
-        map:map
+	var infowindow = new kakao.maps.InfoWindow({
+        content:  "<a class =\"btn btn-danger btn-sm\" href=\"Map.map?num="+list[i].num+"&&id="+list[i].id+
+        		"&&count="+list[i].count+"\" onclick=\"reportChk("+j+");\">신고</a>" +
+        	"<span class=\"info-title\" Style=\"text-align: center;\"><b>"+list[i].title+"</b><b>"+list[i].memo+"</b>" +list[i].date +
+        	"<a class =\"btn btn-primary btn-sm\" href=\"Map.map?num="+list[i].num+"\" onclick=\"deleteData();\">삭제</a>" + text.reverse().join("")+"</span>",
+        //map:map,
+        removable : true
         
     });
-
+	
     // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
     // 이벤트 리스너로는 클로저를 만들어 등록합니다 
     // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-    kakao.maps.event.addListener(marker, 'mouseover', function() {
-		infowindow.setMap(map);
-	});
+    
+    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow) 
+
+    );
     kakao.maps.event.addListener(marker, 'click', makeOutListener(infowindow));
   }  
+ 
+ function setStyleOfElement(el, elStyle){
+	 for(var prop of Object.keys(elStyle)){        		 
+		 el.style[prop.toString()] = elStyle[prop.toString()];        		 
+	 }
+ }
 //인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-/*  function makeOverListener(map, marker, infowindow) {
-     return function() {
-         infowindow.open(map, marker);
+  function makeOverListener(map, marker, infowindow) {
+     return function() {    	    	
+         infowindow.open(map, marker); // html 에서 스타일이 이미 적용된 엘리먼트를 추가를 해버림         
+         document.querySelectorAll('.info-title').forEach(function (item){  
+        	 
+        	 console.log(item.children[0])
+        	 
+        	  setStyleOfElement(item.parentElement, infoWindowStyle)
+        	 //setStyleOfElement(item.children[0], infoSpanStyle)
+        	  //setStyleOfElement(item, infoBoxStyle)
+        	 
+        	 setStyleOfElement(item.parentElement.parentElement, infoContainerStyle)
+         })
      };
- } */
-
+ } 
+ 
  // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
  function makeOutListener(infowindow) {
      return function() {
-         infowindow.close();
+         //infowindow.setMap(null);
+    	 infowindow.close();
      };
  }
 
 </script>
-
+<input style="text-align: center;" onclick="" >
 </body>
 </html>

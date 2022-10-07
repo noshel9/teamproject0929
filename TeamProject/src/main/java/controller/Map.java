@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -32,12 +33,29 @@ public class Map extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
+		}		
+		if(request.getParameter("num")!= null && request.getParameter("id") == null) {
+			try {
+				deleteData(request, response);
+			} catch (ServletException | IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if(request.getParameter("num")!= null && request.getParameter("id")!= null) {
+			System.out.println("123");
+			try {
+				reportUser(request, response);
+			} catch (ServletException | IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
+		request.setCharacterEncoding("UTF-8");		
 		if(request.getParameter("inputmap") != null) {
 		try {
 			dataUpload(request, response);
@@ -50,12 +68,14 @@ public class Map extends HttpServlet {
 	
 	public void dataUpload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		UploadDAO dao = new UploadDAO();
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("UserId");
 		String lat = request.getParameter("lat");
 		String lon = request.getParameter("lon");
 		String memo = request.getParameter("memo");
+		String title = request.getParameter("title");
 		
-		dao.upload(lat, lon, memo);
-		
+		dao.upload(lat, lon, memo, title,id);		
 		response.sendRedirect("map.jsp");	
 		dao.close();
 	}
@@ -64,18 +84,7 @@ public class Map extends HttpServlet {
 		UploadDAO dao = new UploadDAO();		
 		
 		List<UploadDTO> arr =dao.getUpload();		
-		
-//		for(int i=1; i<arr.size(); i++) {			
-//			for(int j=0; j<i; j++ ) {
-//				UploadDTO dto = new UploadDTO();				
-//				if(arr.get(j).getLatitude().equals(arr.get(i).getLatitude()) && arr.get(j).getLongitude().equals(arr.get(i).getLongitude())) {									
-//					dto.setLatitude(arr.get(i).getLatitude());
-//					dto.setLongitude(arr.get(i).getLongitude());
-//					dto.setMemo(arr.get(i).getMemo()+"<br>"+arr.get(j).getMemo());
-//					arr.set(i,dto);  
-//				}
-//			}
-//		}		
+
 		Gson gson = new Gson();
 		String listJson = gson.toJson(arr).toString();
 //		System.out.println(listJson);
@@ -83,4 +92,24 @@ public class Map extends HttpServlet {
 		request.getRequestDispatcher("outputMap.jsp").forward(request, response);
 		dao.close();
 	}
+	public void deleteData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		String num= request.getParameter("num");		
+		
+		UploadDAO dao = new UploadDAO();
+		dao.deleteUploadData(Integer.parseInt(num));
+		
+		response.sendRedirect("Map.map?outputmap=outputmap");		
+	}
+	
+	public void reportUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		int num= Integer.parseInt(request.getParameter("num"));
+		String id= request.getParameter("id");
+		int count= Integer.parseInt(request.getParameter("count"));
+		System.out.println(num+id+count);
+		UploadDAO dao = new UploadDAO();
+		dao.reportUser(num, id, count);
+		
+		response.sendRedirect("Map.map?outputmap=outputmap");
+	}
 }
+

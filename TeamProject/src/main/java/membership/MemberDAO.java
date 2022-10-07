@@ -1,7 +1,10 @@
 package membership;
 
+import java.math.BigDecimal;
+import java.security.spec.RSAKeyGenParameterSpec;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 //import javax.servlet.ServletContext;
 
@@ -16,23 +19,22 @@ public class MemberDAO extends JDBConnect{
 		
 		try {
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, uid);
-			psmt.setString(2, upass);
-			rs = psmt.executeQuery();	
+			psmt.setString(1,  uid);
+			psmt.setString(2,  upass);
+			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
 				dto.setId(rs.getString("id"));
 				dto.setName(rs.getString("name"));
 				dto.setPass(rs.getString("pass"));
-				dto.setRegidate(rs.getString("regidate"));
-				dto.setTel(rs.getString("tel"));
-				dto.setPwfind(rs.getString("pwfind"));
+				dto.setAddress(rs.getString("address"));
+				dto.setRegidate(rs.getString(4));
+				
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("È¸¿ø Á¶È¸ ½ÇÆÐ");
 		}
-		
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
 		return dto;
 	}
 	public int getMemberID(String uid) {
@@ -50,108 +52,78 @@ public class MemberDAO extends JDBConnect{
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("È¸¿ø Á¶È¸ ½ÇÆÐ");
+			System.out.println("È¸ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		return cnt;
 	}
-	
-	public MemberDTO getMemberPw(String id, String pwfind) {
-		MemberDTO dto = new MemberDTO();
-		String query = "select * from member where id=? and pwfind=?";
+
+//	
+	public MemberDTO getaddMemberDTO(String uid, String upass, String name, Timestamp timestamp, 
+			 String address){
+		
+		MemberDTO dto = new MemberDTO(); 
+		
+		String query = "insert into member values(?,?,?,?,?)";
+		
 		
 		try {
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, id);
-			psmt.setString(2, pwfind);
-			rs = psmt.executeQuery();	
+			psmt.setString(1, uid);
+			psmt.setString(2, upass);
+			psmt.setString(3, name);
+			psmt.setString(4, address);
+			psmt.setTimestamp(5, timestamp);			
 			
-			if(rs.next()) {
-				dto.setId(rs.getString("id"));
-				dto.setName(rs.getString("name"));
-				dto.setPass(rs.getString("pass"));
-				dto.setRegidate(rs.getString(4));				
-				dto.setTel(rs.getString("tel"));
-				dto.setPwfind(rs.getString("pwfind"));
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("È¸¿ø Á¶È¸ ½ÇÆÐ");
+			psmt.executeUpdate();
 		}
-		
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
 		return dto;
-	}
-	
-	public MemberDTO getMemberDTO_id(String id) {
-		MemberDTO dto = new MemberDTO();
-		String query = "select * from member where id=?";
-		
-		try {
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, id);			
-			rs = psmt.executeQuery();	
-			
-			if(rs.next()) {
-				dto.setId(rs.getString("id"));
-				dto.setName(rs.getString("name"));
-				dto.setPass(rs.getString("pass"));
-				dto.setRegidate(rs.getString(4));				
-				dto.setTel(rs.getString("tel"));
-				dto.setPwfind(rs.getString("pwfind"));
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("È¸¿ø Á¶È¸ ½ÇÆÐ");
-		}
-		
-		return dto;
-	}
-	
-	public void setMemberDTO(MemberDTO dto) {
-		//MemberDTO dto = new MemberDTO();
-		String query = "insert into member set id=?, pass=?, name=?, age=?, addr=?, tel=?, pwfind=?";		
-		
-		try {
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, dto.getId());
-			psmt.setString(2, dto.getPass());
-			psmt.setString(3, dto.getName());			
-			psmt.setString(6, dto.getTel());
-			psmt.setString(7, dto.getPwfind());
-			psmt.executeUpdate();			
-			
-		} catch (Exception e) {
-			System.out.println("È¸¿ø°¡ÀÔ ½ÇÆÐ");
-			e.printStackTrace();
-		}
-	}
-	
-	public void updateMember(String pw, String tel, String pwfind, String id) {
-		PreparedStatement psmt = null;
-		try{
-			String sql = "update member set pass=?,tel=?,pwfind=? where id=?";
-						
-			psmt = con.prepareStatement(sql);
-			
-			psmt.setString(1,pw);		
-			psmt.setString(2,tel);
-			psmt.setString(3,pwfind);
-			psmt.setString(4,id);
-			
-			int r = psmt.executeUpdate();			
-		}
-		catch(Exception se){				
-			System.out.println(se.getMessage());
-		}
-	}
-	
-	public void deleteMember(String id_chk) throws SQLException {
-		System.out.println(id_chk);
-		String sql = "delete from member where id='"+id_chk+"'";
-		stmt = con.createStatement();
-		int result = stmt.executeUpdate(sql);
-		if(con != null) con.close(); 
 	}
 
+	public MemberDTO getupdateMemberDTO(String uid, String upass, String name,  String address) {
+		MemberDTO dto = new MemberDTO();
+		
+		String query = "update member set pass=?, name=?, address=?" 
+		+ "where id=?";
+
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, upass);
+			psmt.setString(2, name);
+			psmt.setString(3, address);
+			psmt.setString(4, uid);
+			
+			psmt.executeUpdate();
+		}
+		
+		catch(Exception ex) {
+			ex.printStackTrace();
+		
+		}
+		return dto;
+	}
+	
+	public MemberDTO getDeleteMemberDTO(String uid) {
+		
+		MemberDTO dto = new MemberDTO(); 
+		
+		String query = "delete from member where id=?";
+		
+		try {
+			psmt=con.prepareStatement(query);
+			psmt.setString(1, uid);
+			
+			psmt.executeUpdate();
+			
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return dto;
+	}
+	
 
 }
