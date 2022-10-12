@@ -3,11 +3,18 @@ package model1.board;
 import java.sql.Date;
 
 public class CommentDTO {
+	private int deletePK;
 	private int num;
 	private String content;
 	private String id;
 	private Date postdate;
-	
+		
+	public int getDeletePK() {
+		return deletePK;
+	}
+	public void setDeletePK(int deletePK) {
+		this.deletePK = deletePK;
+	}
 	public int getNum() {
 		return num;
 	}

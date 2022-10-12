@@ -8,7 +8,7 @@
 <%
 	String num = request.getParameter("num");
 	//String pageNum = request.getParameter("pageNum");	
-
+	//System.out.println("페이지 넘 : " + pageNum);
 	BoardDAO dao = new BoardDAO();
 	dao.updateVisitCount(num); // 조회수 카운트
 	
@@ -76,14 +76,19 @@
 		</tr>		
 	</table>
 </form>
+<div>
+<div style="text-align: center;">
 <form action="ListModel.li">
 <textarea name="comment" ></textarea>
+<input type="hidden" name="num" value="<%=num%>">
 <input type="submit" value="전송">	
 </form>
 <%for(int i=0; i<list.size(); i++){ %>
+<%=list.get(i).getId() %> : 
 <%=list.get(i).getContent() %>
-<%} %>
-<jsp:include page="BotList.jsp" /> 
+<a href="ListModel.li?deletePK=<%=list.get(i).getDeletePK()%>&&num=<%=num%>">삭제</a>
+<%} %></div></div>
 
+<jsp:include page="BotList.jsp" />
 </body>
 </html>

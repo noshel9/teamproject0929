@@ -51,6 +51,7 @@ public class CommentDAO extends JDBConnect{
                 dto.setContent(rs.getString("content"));                
                 dto.setId(rs.getString("id"));
                 dto.setPostdate(rs.getDate("postdate"));
+                dto.setDeletePK(rs.getInt("deletePK"));
                 list.add(dto);
 
             }
@@ -63,16 +64,16 @@ public class CommentDAO extends JDBConnect{
         return list; 
     }
     
-    public int deleteComment(BoardDTO dto) { 
+    public int deleteComment(int deletePK) { 
         int result = 0;
 
         try {
             // Äõ¸®¹® ÅÛÇÃ¸´
-            String query = "DELETE FROM comment WHERE id=?"; 
+            String query = "DELETE FROM comment WHERE deletePK=?"; 
 
             // Äõ¸®¹® ¿Ï¼º
             psmt = con.prepareStatement(query); 
-            psmt.setString(1, dto.getId()); 
+            psmt.setInt(1, deletePK); 
 
             // Äõ¸®¹® ½ÇÇà
             result = psmt.executeUpdate(); 

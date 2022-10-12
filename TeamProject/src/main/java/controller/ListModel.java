@@ -23,11 +23,19 @@ public class ListModel extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ListPageNation(request, response);
-		//if(request.getParameter("comment") != null) {
+		request.setCharacterEncoding("utf-8");
+		if(request.getParameter("List")!=null) {
+			ListPageNation(request, response);
+		
+		}
+		if(request.getParameter("comment") != null) {
 			insertComment(request, response);
-			System.out.println("인서트코멘트");
-		//}
+			
+		}
+		
+		if(request.getParameter("deletePK") != null) {
+			deleteComment(request, response);
+		}
 					
 	}
 
@@ -41,10 +49,10 @@ public class ListModel extends HttpServlet {
 		if(request.getParameter("deletePost")!= null) { // get 타입은 별도의 조건 없어도 되나?
 			deleteBoard(request, response);
 		}
-		//if(request.getParameter("comment") != null) {
+		if(request.getParameter("comment") != null) {
 			insertComment(request, response);
 			System.out.println("인서트코멘트");
-		//}
+		}
 	}
 	
 	public void ListPageNation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -228,6 +236,7 @@ public class ListModel extends HttpServlet {
 	public void insertComment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();		
 		String num = request.getParameter("num");
+		//String pageNum = request.getParameter("pageNum");
 		String content = request.getParameter("comment");
 		String id = (String) session.getAttribute("UserId");		
 		
@@ -238,12 +247,17 @@ public class ListModel extends HttpServlet {
 		dto.setNum(Integer.parseInt(num));		
 		dao.insertComment(dto);
 		
-		response.sendRedirect("../Board/View.jsp?num="+num);
+		response.sendRedirect("View.jsp?num="+num);
 		
 		dao.close();		
 	}
 	
 	public void deleteComment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String deletePK = request.getParameter("deletePK");
+		String num = request.getParameter("num");
+		CommentDAO dao = new CommentDAO();	
 		
+		dao.deleteComment(Integer.parseInt(deletePK));
+		response.sendRedirect("View.jsp?num="+num);
 	}
 }
