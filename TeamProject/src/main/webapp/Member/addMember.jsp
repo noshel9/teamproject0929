@@ -10,16 +10,17 @@
 	function checkForm() {
 		if(!document.newMember.id.value) {
 			alert("아이디를 입력하세요.");
-			return false;
+			return;
 		}
 		if(!document.newMember.pass.value) {
 			alert("비밀번호를 입력하세요.");
-			return false;
+			return;
 		}
-		if(document.newMember.pass.value != document.newMember.pass_confirm.value) {
+		if(document.newMember.pass.value != document.newMember.pw_confirm.value) {
 			alert("비밀번호가 일치하지 않습니다.");
-			return false;
+			return;
 		}
+		document.newMember.submit();
 	}
 </script>
 <title>회원 가입</title>
@@ -34,7 +35,7 @@
 	
 	<div class="container">
 		<form name="newMember" action="addMemberform.do" method="post"  
-		class="form-horizontal" onsubmit="return checkForm()">
+		class="form-horizontal">
 			<div class="form-group row">
 				<label class="col-sm-2">아이디</label>
 				<div class="col-sm-3">
@@ -66,8 +67,8 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<div class="col-sm-offset-2 col-sm-10">
-					<input type="submit" class="btn btn-primary" value="등록" >
+				<div class="col-sm-offset-2 col-sm-10"> 
+					<input type="button" class="btn btn-primary" value="등록" onclick="checkForm();">
 					<input type="reset" class="btn btn-primary" value="취소" onclick="reset()">
 				</div>
 			</div>		

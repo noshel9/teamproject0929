@@ -17,14 +17,14 @@ import model1.board.BoardDTO;
 import model1.board.CommentDAO;
 import model1.board.CommentDTO;
 
-
+@WebServlet("/ListModel")
 public class ListModel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		if(request.getParameter("List")!=null) {
+		if(request.getParameter("List")!=null || request.getParameter("pageNum")!= null) {
 			ListPageNation(request, response);
 		
 		}
@@ -36,13 +36,15 @@ public class ListModel extends HttpServlet {
 		if(request.getParameter("deletePK") != null) {
 			deleteComment(request, response);
 		}
+
 					
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		if(request.getParameter("pageRight") != null || request.getParameter("pageLeft") != null) ListPageNation(request, response);
+		if(request.getParameter("pageRight") != null || request.getParameter("hdnbt") != null) ListPageNation(request, response);
+	
 		if(request.getParameter("write") !=null) {
 			write(request, response);			
 		}	
@@ -50,8 +52,7 @@ public class ListModel extends HttpServlet {
 			deleteBoard(request, response);
 		}
 		if(request.getParameter("comment") != null) {
-			insertComment(request, response);
-			System.out.println("인서트코멘트");
+			insertComment(request, response);			
 		}
 	}
 	
@@ -214,7 +215,7 @@ public class ListModel extends HttpServlet {
 			}		
 		}		
 		Bdao.close();
-		response.sendRedirect("ListModel.li");
+		response.sendRedirect("ListModel.li?List=List");
 	}
 	
 	public void deleteBoard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -230,7 +231,7 @@ public class ListModel extends HttpServlet {
 		}else{
 			System.out.println("게시글 삭제 실패");		
 		}
-		response.sendRedirect("ListModel.li");
+		response.sendRedirect("ListModel.li?List=List");
 	}
 	
 	public void insertComment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -253,11 +254,14 @@ public class ListModel extends HttpServlet {
 	}
 	
 	public void deleteComment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();	
 		String deletePK = request.getParameter("deletePK");
 		String num = request.getParameter("num");
+		String id = (String) session.getAttribute("UserId");
+		
 		CommentDAO dao = new CommentDAO();	
 		
-		dao.deleteComment(Integer.parseInt(deletePK));
+		dao.deleteComment(Integer.parseInt(deletePK),id);
 		response.sendRedirect("View.jsp?num="+num);
 	}
 }

@@ -9,16 +9,17 @@
 	function checkForm() {
 		if (!document.newMember.id.value) {
 			alert("아이디를 입력하세요.");
-			return false;
+			return;
 		}
 		if (!document.newMember.pass.value) {
 			alert("비밀번호를 입력하세요.");
-			return false;
+			return;
 		}
-		if (document.newMember.pass.value != document.newMember.pass_confirm.value) {
+		if (document.newMember.pass.value != document.newMember.pw_confirm.value) {
 			alert("비밀번호가 일치하지 않습니다.");
-			return false;
+			return;
 		}
+		document.newMember.submit();
 	}
 </script>
 <% String UserId = (String) session.getAttribute("UserId"); %>
@@ -44,7 +45,7 @@
 	
 	<div class="container">
 		<form name="newMember" action="updateMemberform.do" method="post"  
-		class="form-horizontal" onsubmit="return checkForm()">
+		class="form-horizontal">
 			<div class="form-group row">
 				<label class="col-sm-2">아이디</label>
 				<div class="col-sm-3">
@@ -82,7 +83,7 @@
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
-					<input type="submit" class="btn btn-primary" value="회원수정" >
+					<input type="button" class="btn btn-primary" value="회원수정" onclick="checkForm();">
 					<a href="deleteMemberform.do" class="btn btn-primary">회원탈퇴</a>
 				</div>
 			</div>		

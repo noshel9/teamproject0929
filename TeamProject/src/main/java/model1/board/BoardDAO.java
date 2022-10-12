@@ -191,15 +191,13 @@ public class BoardDAO extends JDBConnect {
         
         try {
             // INSERT 孽府巩 累己 
-            String query = "INSERT INTO board ( "
-                         + " title,content,id,visitcount) "
-                         + " VALUES ( "
-                         + " ?, ?, ?, 0)";  
+            String query = "insert into board set title=?,content=?, id = ?,visitcount=?";
 
             psmt = con.prepareStatement(query);  // 悼利 孽府 
             psmt.setString(1, dto.getTitle());  
             psmt.setString(2, dto.getContent());
-            psmt.setString(3, dto.getId());  
+            psmt.setString(3, dto.getId());
+            psmt.setInt(4, 0);  
             
             result = psmt.executeUpdate(); 
         }

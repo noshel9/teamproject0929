@@ -18,15 +18,16 @@
 	<div class = "container" align="center">
 	<%
 		String msg = request.getParameter("msg");
-		
+		String loginId = (String) session.getAttribute("UserId");
 		if(msg != null) {
 			if (msg.equals("0"))
 				out.println(" <h2 class='alert alert-danger'>회원정보가 수정되었습니다.</h2>");
 			else if (msg.equals("1"))
 				out.println(" <h2 class='alert alert-danger'>회원 가입을 축하드립니다.</h2>");
-			else if (msg.equals("2")) {
-				String loginId = (String) session.getAttribute("UserId");
+			else if (msg.equals("2") && loginId != null) {				
 				out.println(" <h2 class='alert alert-danger'>" + loginId + "님 환영합니다.</h2>");
+			}else if (loginId == null){				
+				response.sendRedirect("loginMember.jsp?loginId=loginId");
 			}
 		} else {
 			out.println("<h2 class='alert alert-danger'>회원정보가 삭제되었습니다.</h2>");

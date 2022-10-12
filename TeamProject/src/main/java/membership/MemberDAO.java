@@ -59,12 +59,12 @@ public class MemberDAO extends JDBConnect{
 	}
 
 //	
-	public MemberDTO getaddMemberDTO(String uid, String upass, String name, Timestamp timestamp, 
+	public MemberDTO getaddMemberDTO(String uid, String upass, String name,  
 			 String address){
 		
 		MemberDTO dto = new MemberDTO(); 
 		
-		String query = "insert into member values(?,?,?,?,?)";
+		String query = "insert into member set id=?,pass =?,name=?,address=?";
 		
 		
 		try {
@@ -73,7 +73,7 @@ public class MemberDAO extends JDBConnect{
 			psmt.setString(2, upass);
 			psmt.setString(3, name);
 			psmt.setString(4, address);
-			psmt.setTimestamp(5, timestamp);			
+			//psmt.setTimestamp(5, timestamp);			
 			
 			psmt.executeUpdate();
 		}

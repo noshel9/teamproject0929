@@ -71,7 +71,7 @@
 				<button class="btn btn-secondary btn-sm" type="button" onclick="location.href='Write.jsp?num=<%=dto.getNum()%>';">수정하기</button>
 				<button class="btn btn-danger btn-sm" type="button" onclick="deletePost();">삭제하기</button>
 				<%} %>
-				<button class="btn btn-secondary btn-sm" type="button" onclick="location.href='ListModel.li';">목록보기</button>
+				<button class="btn btn-secondary btn-sm" type="button" onclick="location.href='ListModel.li?List=List';">목록보기</button>
 			</td>			
 		</tr>		
 	</table>

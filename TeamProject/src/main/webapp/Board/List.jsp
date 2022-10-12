@@ -101,7 +101,7 @@ if (boardLists == null || boardLists.size() == 0) {
         </tr>
     </table>
     </div>    
-    <form action="ListModel.li" name="pageLeftForm" method="post">
+    <form action="ListModel.li?List=List" name="pageLeftForm" method="post">
     <div style="text-align: center; height: auto; width: 25%; margin: auto;">  
     <b><%=pageNum %>page</b><br/> 
         <nav aria-label="Page navigation example">

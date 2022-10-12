@@ -2,33 +2,42 @@ SELECT * FROM jspwebmarket.member;
 alter table board drop foreign key board_ibfk_1;
 select * from information_schema.table_constraints where table_name = 'board';
 select * from uploaddata;
+select * from board;
+select * from member;
+select * from comment;
 
 create table member(
 id varchar(10) not null,
 pass varchar(10) not null,
 name varchar(30) not null,
-addr varchar(50) not null,
-tel varchar(10) not null,
+address varchar(50) not null,
 regidate datetime default(sysdate()),
 primary key (id)
 );
-alter table member add count int;
+-- alter table member add count int;
+-- alter table member drop count;
+-- alter table member drop tel;
+-- alter table member drop addr;
+-- alter table member add address varchar(50) not null;
+drop table member;
 
 create table uploaddata(
-Latitude decimal(21,16) not null,
-longitude decimal(21,16) not null,
+Lat decimal(21,16) not null,
+lng decimal(21,16) not null,
 memo varchar(50) not null,
-regidate datetime default(sysdate())
+regidate datetime default(sysdate()),
+num int not null auto_increment,
+title varchar(50) not null,
+count int,
+id varchar(10) not null,
+primary key(num)
 );
 -- alter table uploaddata add regidate datetime default(sysdate());
+-- alter table uploaddata add num int not null auto_increment;
+-- alter table uploaddata add count int;
+-- alter table uploaddata add id varchar(10) not null;
 drop table uploaddata;
 	
-SHOW VARIABLES LIKE 'event%';	
-SET GLOBAL event_scheduler = on;
-SELECT * FROM information_schema.events;
-show events;
-drop event uploaddata_reset;
-
 create table board(
 num int not null auto_increment,
 title varchar(200) not null,
@@ -36,15 +45,32 @@ content varchar(2000) not null,
 id varchar(10) not null,
 postdate date default (current_date),
 visitcount int,
-foreign key (id) references member(id),
 primary key (num)
 );
+
+create table comment(
+deletePK int not null auto_increment,
+num int not null,
+content varchar(2000) not null,
+id varchar(10) not null,
+postdate datetime default(sysdate()),
+primary key (deletePK)
+);
+drop table comment;
+insert into comment (num, content, id) VALUES(1, '1234', 'ssh');
+insert into comment (num, content, id) VALUES(2, '2222', 'ssh');
+    
+SHOW VARIABLES LIKE 'event%';	
+SET GLOBAL event_scheduler = on;
+SELECT * FROM information_schema.events;
+show events;
+drop event uploaddata_reset;
 
 DELIMITER $
 CREATE EVENT uploaddata_reset
 ON 
 SCHEDULE
-EVERY 1 DAY STARTS '2022-10-05 06:30:00'
+EVERY 1 DAY STARTS '2022-10-07 10:20:00'
 DO 
 begin
 truncate uploaddata;

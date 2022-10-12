@@ -34,6 +34,8 @@
 					out.println("</div>");
 					}
 					
+				}if(request.getParameter("loginId") != null){
+					out.println(" <h2 class='alert alert-danger'>" + "아이디 혹은 비밀번호가 틀렸습니다.</h2>");
 				}
 				cnt++;
 			%>

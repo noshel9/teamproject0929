@@ -64,16 +64,17 @@ public class CommentDAO extends JDBConnect{
         return list; 
     }
     
-    public int deleteComment(int deletePK) { 
+    public int deleteComment(int deletePK, String id) { 
         int result = 0;
 
         try {
             // Äõ¸®¹® ÅÛÇÃ¸´
-            String query = "DELETE FROM comment WHERE deletePK=?"; 
+            String query = "DELETE FROM comment WHERE deletePK=? and id=?"; 
 
             // Äõ¸®¹® ¿Ï¼º
             psmt = con.prepareStatement(query); 
-            psmt.setInt(1, deletePK); 
+            psmt.setInt(1, deletePK);
+            psmt.setString(2, id); 
 
             // Äõ¸®¹® ½ÇÇà
             result = psmt.executeUpdate(); 
