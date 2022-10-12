@@ -10,11 +10,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="Map.map?Keyword=Keyword">
+<input type="text" name=keyword>
+<input type="submit" value="전송">
+</form>
 <jsp:include page="menu.jsp" />
 <div class="map_wrap">
     <div id="map" style="width:100%;height:250%;position:relative;overflow:hidden; margin: auto;"></div>
-    <ul id="category">
-        <li id="CS2" data-order="5" class=""  onclick="onClickCategory();"> 
+    <ul class="" id="category">
+        <li id="CS2" data-order="5" onclick="onClickCategory();"> 
             <span class="category_bg store" ></span>
             편의점
         </li>      
@@ -22,7 +26,9 @@
 </div>
 <p><em>지도를 클릭해주세요!</em></p> 
 <div id="clickLatlng"></div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=def47418c26c1b2e8383afc08b8370c5&libraries=services"></script>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=def47418c26c1b2e8383afc08b8370c5&libraries=services,clusterer"></script>
+
 <script>
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
@@ -39,9 +45,21 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-//HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-if (navigator.geolocation) {
- 
+// 마커 클러스터러를 생성합니다 
+var clusterer = new kakao.maps.MarkerClusterer({
+    map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+    minLevel: 5 // 클러스터 할 최소 지도 레벨 
+});
+
+<%
+String space = "\"\"";
+String keyword_ = "\""+request.getParameter("keyword")+"\"";
+%>
+var keyword = <%=request.getParameter("keyword")==null ? space : keyword_%>;
+
+//HTML5의 geolocation으로 사용할 수 있는지 확인합니다
+if (navigator.geolocation && keyword == '') { 
  // GeoLocation을 이용해서 접속 위치를 얻어옵니다
  navigator.geolocation.getCurrentPosition(function(position) {
      
@@ -52,18 +70,30 @@ if (navigator.geolocation) {
          message = '<div style="padding:5px;">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
      
      // 마커와 인포윈도우를 표시합니다
-     displayMarker(locPosition, message);
-         
-   });
+     displayMarker(locPosition, message);         
+   }); 
+}else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
  
-} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
- 
- var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
-     message = 'geolocation을 사용할수 없어요..'
+/*  var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+     message = 'geolocation을 사용할수 없어요, 키워드를 입력해주세요'
      
  displayMarker(locPosition, message);
+  */
+  function placesSearchCB(data, status, pagination) {
+	    if (status === kakao.maps.services.Status.OK) {
+	    	 var bounds = new kakao.maps.LatLngBounds();
+	        // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
+	        displayPlaces(data);
+	        for (var i=0; i<data.length; i++) {
+	        //    displayMarker(data[i]);    
+	            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+	        } 
+	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+	        map.setBounds(bounds);        
+	    }
+	}
 }
-
+ 
 //지도에 마커와 인포윈도우를 표시하는 함수입니다
 function displayMarker(locPosition, message) {
 
@@ -92,8 +122,8 @@ function displayMarker(locPosition, message) {
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places(map); 
 
-// 지도에 idle 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'idle', searchPlaces);
+// 지도에 idle 이벤트를 등록합니다 ..> 이게 문제 였음, 키워드 화면 전환 에러
+if(keyword == '')kakao.maps.event.addListener(map, 'idle', searchPlaces);
 
 // 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
 contentNode.className = 'placeinfo_wrap';
@@ -129,16 +159,23 @@ function searchPlaces() {
 
     // 지도에 표시되고 있는 마커를 제거합니다
    removeMarker();
-    
+   
     ps.categorySearch(currCategory, placesSearchCB, {useMapBounds:true}); 
 }
-
+ps.keywordSearch(keyword, placesSearchCB); 
+console.log(ps.keywordSearch);
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
-
+    	 //var bounds = new kakao.maps.LatLngBounds();
         // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
         displayPlaces(data);
+        for (var i=0; i<data.length; i++) {
+        //    displayMarker(data[i]);    
+          //  bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        } 
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        //if(keyword !='') map.setBounds(bounds);        
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         // 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
 
@@ -150,18 +187,17 @@ function placesSearchCB(data, status, pagination) {
 
 // 지도에 마커를 표출하는 함수입니다
 function displayPlaces(places) {
-
+	 
     // 몇번째 카테고리가 선택되어 있는지 얻어옵니다
     // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
-    var order = document.getElementById(currCategory).getAttribute('data-order');
-
-    
-
+    var order = document.getElementById(currCategory).getAttribute('data-order');    
+    console.log(document.getElementById(currCategory));
+	var markers =[];
     for ( var i=0; i<places.length; i++ ) {
 
             // 마커를 생성하고 지도에 표시합니다
             var marker = addMarker(new kakao.maps.LatLng(places[i].y, places[i].x), order);
-
+			markers.push(marker);
             // 마커와 검색결과 항목을 클릭 했을 때
             // 장소정보를 표출하도록 클릭 이벤트를 등록합니다
             (function(marker, place) {
@@ -170,10 +206,23 @@ function displayPlaces(places) {
                 });
             })(marker, places[i]);
     }
+
+    //clusterer.removeMarkers( markers );
+     clusterer.addMarkers(markers);    
+    for(var i=0; i<clusterer._markers.length; i++){    	
+    	for(var j=0; j<i; j++){
+    		if(JSON.stringify(clusterer._markers[i].n) === JSON.stringify(clusterer._markers[j].n)){    			
+        		//console.log(clusterer._markers[i].n);
+        		clusterer.removeMarkers(markers);
+        		break;
+        	}
+    	}
+    }
 }
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, order) {
+	
     var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new kakao.maps.Size(27, 28),  // 마커 이미지의 크기
         imgOptions =  {
@@ -188,8 +237,14 @@ function addMarker(position, order) {
         });
 
     marker.setMap(map); // 지도 위에 마커를 표출합니다
-    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+    markers.push(marker);  // 배열에 생성된 마커를 추가합니다 
+	    
+    // 클러스터러에 마커들을 추가합니다
+    //clusterer.addMarkers(markers);
+    
+    //console.log(markers);
 
+    
     return marker;
 }
 
@@ -199,6 +254,7 @@ function removeMarker() {
         markers[i].setMap(null);
     }   
     markers = [];
+    
 }
 function dpSubmit() {
 	
@@ -257,13 +313,15 @@ function onClickCategory() {
         currCategory = '';
         changeCategoryClass();
         removeMarker(); 
+        
      } else { 
         currCategory = id;
         changeCategoryClass(this);
         searchPlaces();
      }
 }
-
+//setTimeout(onClickCategory,100);
+//setTimeout(onClickCategory,1000);
 // 클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
  function changeCategoryClass(el) {
  
@@ -311,7 +369,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     	'<input class="form-control" placeholder="편의점명" type="text" name="title">'+
     	'<input class="form-control" placeholder="내용" type="text" name="memo">'+
     	'<input type="hidden" name="lat" value="'+lat+'">'+'<input type="hidden" name="lon" value="'+lon+'">'+
-    	'<input type="submit" value ="전송">'+
+    	'<input class="btn btn-primary" type="submit" value ="전송">'+
     	'</form>'
     	, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     iwPosition = new kakao.maps.LatLng(lat, lon), //인포윈도우 표시 위치입니다
@@ -330,9 +388,10 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     	removable : iwRemoveable
     	
 });
-	
-		panTo();
-    
+	    
+		panTo();		
+		
+		
 });
 </script>
 

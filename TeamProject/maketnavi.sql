@@ -29,6 +29,17 @@ SELECT * FROM information_schema.events;
 show events;
 drop event uploaddata_reset;
 
+create table board(
+num int not null auto_increment,
+title varchar(200) not null,
+content varchar(2000) not null,
+id varchar(10) not null,
+postdate date default (current_date),
+visitcount int,
+foreign key (id) references member(id),
+primary key (num)
+);
+
 DELIMITER $
 CREATE EVENT uploaddata_reset
 ON 

@@ -19,17 +19,17 @@
 				<ul class = "navbar-nav mr-auto">
 				<c:choose>
 					<c:when test ="${empty UserId}">
-						<li class = "nav-item"><a class="nav-link" href='<c:url value="loginMember.jsp" />'>로그인</a> </li>
-						<li class = "nav-item"><a class="nav-link" href='<c:url value="addMember.jsp" />'>회원가입</a> </li>
+						<li class = "nav-item"><a class="nav-link" href='<c:url value="../Member/loginMember.jsp" />'>로그인</a> </li>
+						<li class = "nav-item"><a class="nav-link" href='<c:url value="../Member/addMember.jsp" />'>회원가입</a> </li>
 						<li class="nav-item"><a class="nav-link" href='<c:url value="../Map.map?outputmap=outputmap" />'>편의점 보기</a></li>
 					</c:when>
 					<c:otherwise>
 						<li style="padding-top:7px; color:white;">[<%=UserId %>님]</li>
-						<li class="nav-item"><a class="nav-link" href='<c:url value="logoutMember.jsp" />'>로그아웃</a></li>
-						<li class="nav-item"><a class="nav-link" href='<c:url value="updateMember.jsp" />'>회원수정</a></li>
+						<li class="nav-item"><a class="nav-link" href='<c:url value="../Member/logoutMember.jsp" />'>로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link" href='<c:url value="../Member/updateMember.jsp" />'>회원수정</a></li>
 						<li class="nav-item"><a class="nav-link" href='<c:url value="../map.jsp" />'>편의점 등록</a></li>
 						<li class="nav-item"><a class="nav-link" href='<c:url value="../Map.map?outputmap=outputmap" />'>편의점 보기</a></li>
-						<li class="nav-item"><a class="nav-link" href='<c:url value="../Board/ListModel.li" />'>건의 게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href='<c:url value="ListModel.li" />'>건의 게시판</a></li>
 					</c:otherwise>
 					</c:choose>
 					

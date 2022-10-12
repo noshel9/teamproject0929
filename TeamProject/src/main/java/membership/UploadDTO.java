@@ -1,8 +1,8 @@
 package membership;
 
 public class UploadDTO {
-	private String Latitude;
-	private String longitude;
+	private String lat;
+	private String lng;
 	private String memo;
 	private String date;
 	private int num;
@@ -11,16 +11,16 @@ public class UploadDTO {
 	private int count;
 	
 	public String getLatitude() {
-		return Latitude;
+		return lat;
 	}
 	public void setLatitude(String latitude) {
-		Latitude = latitude;
+		lat = latitude;
 	}
 	public String getLongitude() {
-		return longitude;
+		return lng;
 	}
 	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+		this.lng = longitude;
 	}
 	public String getMemo() {
 		return memo;

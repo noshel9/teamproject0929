@@ -8,8 +8,8 @@
 	request.setCharacterEncoding("utf-8");
 	String UserId = (String)session.getAttribute("UserId");
 %>
-<link rel = "stylesheet" href="css/bootstrap.min.css">
 
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> <!-- 참조  -->
 	<nav class = "navbar navbar-expand navbar-dark bg-dark">
 		<div class = "container">
 			<div class = "navbar-header">
@@ -29,6 +29,7 @@
 						<li class="nav-item"><a class="nav-link" href='<c:url value="Member/updateMember.jsp" />'>회원수정</a></li>
 						<li class="nav-item"><a class="nav-link" href='<c:url value="map.jsp" />'>편의점 등록</a></li>
 						<li class="nav-item"><a class="nav-link" href='<c:url value="Map.map?outputmap=outputmap" />'>편의점 보기</a></li>
+						<li class="nav-item"><a class="nav-link" href='<c:url value="Board/ListModel.li" />'>건의 게시판</a></li>
 					</c:otherwise>
 					</c:choose>
 					

@@ -14,7 +14,7 @@ public class UploadDAO extends JDBConnect {
 		
 		PreparedStatement psmt = null;
 		try {
-			String sql = "insert into uploaddata set Latitude=?,longitude=?,memo=?,title=?,id = ?,count=?";
+			String sql = "insert into uploaddata set Lat=?,lng =?,memo=?,title=?,id = ?,count=?";
 			psmt = con.prepareStatement(sql);
 			BigDecimal Changelat = new BigDecimal(lat);
 			BigDecimal Changelon = new BigDecimal(lon);
@@ -46,8 +46,8 @@ public class UploadDAO extends JDBConnect {
 			
 			while(rs.next()) {
 				UploadDTO dto = new UploadDTO();
-				dto.setLatitude(rs.getString("Latitude"));
-				dto.setLongitude(rs.getString("longitude"));
+				dto.setLatitude(rs.getString("Lat"));
+				dto.setLongitude(rs.getString("lng"));
 				dto.setMemo(rs.getString("memo"));
 				dto.setDate(rs.getString("regidate"));
 				dto.setNum(rs.getInt("num"));

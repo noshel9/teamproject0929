@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,12 +42,21 @@ public class Map extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 		}
 		
 		if(request.getParameter("num")!= null && request.getParameter("id")!= null) {
 			System.out.println("123");
 			try {
 				reportUser(request, response);
+			} catch (ServletException | IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(request.getParameter("keyword") != null) {
+			try {
+				keyWord(request, response);
 			} catch (ServletException | IOException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -62,6 +72,14 @@ public class Map extends HttpServlet {
 		} catch (ServletException | IOException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			}
+		}
+		if(request.getParameter("keyword") != null) {
+			try {
+				keyWord(request, response);
+			} catch (ServletException | IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
@@ -86,7 +104,7 @@ public class Map extends HttpServlet {
 		List<UploadDTO> arr =dao.getUpload();		
 
 		Gson gson = new Gson();
-		String listJson = gson.toJson(arr).toString();
+		String listJson = gson.toJson(arr);
 //		System.out.println(listJson);
 		request.setAttribute("UploadDTO", listJson);
 		request.getRequestDispatcher("outputMap.jsp").forward(request, response);
@@ -110,6 +128,14 @@ public class Map extends HttpServlet {
 		dao.reportUser(num, id, count);
 		
 		response.sendRedirect("Map.map?outputmap=outputmap");
+	}
+	
+	public void keyWord(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		String keyword = request.getParameter("keyword");
+		System.out.println(keyword);
+		request.getRequestDispatcher("map.jsp").forward(request, response);
+		
+		
 	}
 }
 

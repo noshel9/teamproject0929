@@ -15,14 +15,18 @@
 <body>
 <jsp:include page="menu.jsp" />
 <!-- 지도를 표시할 div 입니다 -->
-<div id="map" style="width:100%;height:100%;"></div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=def47418c26c1b2e8383afc08b8370c5"></script>
+<div id="map" style="width:100%;height:94%;"></div>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=def47418c26c1b2e8383afc08b8370c5&libraries=services,drawing,clusterer"></script>
+
 <%
 String list= request.getAttribute("UploadDTO").toString();
 System.out.println(list);
 %>
 <jsp:include page="InfoWindowStyle.jsp"></jsp:include>
 <script>
+var list = <%=request.getAttribute("UploadDTO")%>
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -31,6 +35,30 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 var map = new kakao.maps.Map(mapContainer, mapOption);
+
+//마커 클러스터러를 생성합니다 
+var clusterer = new kakao.maps.MarkerClusterer({
+    map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+    minLevel: 5 // 클러스터 할 최소 지도 레벨 
+});
+
+// 데이터를 가져오기 위해 jQuery를 사용합니다
+// 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
+
+/* $.get(list, function(data) {
+    // 데이터에서 좌표 값을 가지고 마커를 표시합니다
+    // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+    
+    var markers = $(data.positions).map(function(i, position) {
+        return new kakao.maps.Marker({
+            position : new kakao.maps.LatLng(position.lat, position.lng)
+        });
+    });
+    
+    // 클러스터러에 마커들을 추가합니다
+    clusterer.addMarkers(markers);
+}); */
 
 //HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 if (navigator.geolocation) {
@@ -81,7 +109,7 @@ function displayMarker(locPosition, message) {
     // 지도 중심좌표를 접속위치로 변경합니다
     map.setCenter(locPosition);      
 }    
-var list = <%=request.getAttribute("UploadDTO")%>
+
 
 // 마커 이미지의 이미지 주소입니다
 var imageSrc = "image/abcd3.png"; 
@@ -98,6 +126,8 @@ function deleteData() { // 업로드데이터삭제
 	alert("삭제가 완료되었습니다.");
 }
 
+//마커들을 저장할 변수 생성(마커 클러스터러 관련)
+var markers = [];
 
  for (var i =0; i < list.length; i++) {    
     // 마커 이미지의 이미지 크기 입니다
@@ -109,17 +139,23 @@ function deleteData() { // 업로드데이터삭제
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({        
     	map: map, // 마커를 표시할 지도        
-        position: new kakao.maps.LatLng(list[i].Latitude, list[i].longitude), // 마커를 표시할 위치        
+        position: new kakao.maps.LatLng(list[i].lat, list[i].lng), // 마커를 표시할 위치        
         //title : list[i].memo, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
         image : markerImage, // 마커 이미지      	 
         clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
     });	
 
+
+    // 생성된 마커를 마커 저장하는 변수에 넣음(마커 클러스터러 관련)
+    markers.push(marker);
+    
+    
+    
     // 마커에 표시할 인포윈도우를 생성합니다     
     
     var text = [];
 	for(var j =0; j<i; j++){
-		if(list[i].Latitude == list[j].Latitude && list[i].longitude == list[j].longitude ) text.push("<a class =\"btn btn-danger btn-sm\" href=\"Map.map?num="+
+		if(list[i].lat == list[j].lat && list[i].lng == list[j].lng ) text.push("<a class =\"btn btn-danger btn-sm\" href=\"Map.map?num="+
 				list[j].num+"&&id="+list[j].id+"&&count="+list[j].count+"\"onclick=\"reportChk("+j+");\">신고</a>" +
 				"<b>"+list[j].memo+"</b>"+list[j].date+
 				"<a class =\"btn btn-primary btn-sm\" href=\"Map.map?num="+list[j].num+"\" onclick=\"deleteData();\">삭제</a>") ; 
@@ -144,6 +180,9 @@ function deleteData() { // 업로드데이터삭제
     );
     kakao.maps.event.addListener(marker, 'click', makeOutListener(infowindow));
   }  
+ 
+//클러스터러에 마커들을 추가합니다(마커 클러스터러 관련)
+ clusterer.addMarkers(markers);
  
  function setStyleOfElement(el, elStyle){
 	 for(var prop of Object.keys(elStyle)){        		 
@@ -176,6 +215,6 @@ function deleteData() { // 업로드데이터삭제
  }
 
 </script>
-<input style="text-align: center;" onclick="" >
+
 </body>
 </html>

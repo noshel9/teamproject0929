@@ -14,29 +14,37 @@ import javax.servlet.http.HttpSession;
 
 import model1.board.BoardDAO;
 import model1.board.BoardDTO;
+import model1.board.CommentDAO;
+import model1.board.CommentDTO;
 
-@WebServlet("/ListModel")
+
 public class ListModel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ListPageNation(request, response);
-		
-
-			
-			
+		//if(request.getParameter("comment") != null) {
+			insertComment(request, response);
+			System.out.println("인서트코멘트");
+		//}
+					
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		if(request.getParameter("pageRight") != null || request.getParameter("pageLeft") != null) ListPageNation(request, response);
 		if(request.getParameter("write") !=null) {
 			write(request, response);			
 		}	
 		if(request.getParameter("deletePost")!= null) { // get 타입은 별도의 조건 없어도 되나?
 			deleteBoard(request, response);
 		}
+		//if(request.getParameter("comment") != null) {
+			insertComment(request, response);
+			System.out.println("인서트코멘트");
+		//}
 	}
 	
 	public void ListPageNation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +58,7 @@ public class ListModel extends HttpServlet {
 		String pageLeft = request.getParameter("hdnbt");	// 이전 버튼 동작 여부 확인용
 		String pageList = request.getParameter("i");		// 지금 시점에서 가장 마지막 페이지의 숫자
 		String pageRight = request.getParameter("pageRight"); // 다음 버튼 동작 여부 확인용
-
+		System.out.println(pageRight);
 		if(pageNum == null){ // 초기 페이지에서 null 값 대신 1을 집어 넣어줌
 			pageNum ="1";
 		}
@@ -215,5 +223,27 @@ public class ListModel extends HttpServlet {
 			System.out.println("게시글 삭제 실패");		
 		}
 		response.sendRedirect("ListModel.li");
+	}
+	
+	public void insertComment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();		
+		String num = request.getParameter("num");
+		String content = request.getParameter("comment");
+		String id = (String) session.getAttribute("UserId");		
+		
+		CommentDAO dao = new CommentDAO();
+		CommentDTO dto = new CommentDTO();
+		dto.setContent(content);
+		dto.setId(id);
+		dto.setNum(Integer.parseInt(num));		
+		dao.insertComment(dto);
+		
+		response.sendRedirect("../Board/View.jsp?num="+num);
+		
+		dao.close();		
+	}
+	
+	public void deleteComment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 }

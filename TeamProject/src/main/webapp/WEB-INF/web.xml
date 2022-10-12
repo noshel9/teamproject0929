@@ -46,11 +46,15 @@
 	<servlet-name>deleteMemberform</servlet-name>
 	<url-pattern>/Member/deleteMemberform.do</url-pattern>
 </servlet-mapping>
+<servlet>
+	<servlet-name>ListModel</servlet-name>
+	<servlet-class>controller.ListModel</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>ListModel</servlet-name>
+	<url-pattern>/Board/ListModel.li</url-pattern>
+</servlet-mapping>
 <!-- Member controller -->
-
-
-
-
 
 <!-- https security -->
 <security-constraint>
