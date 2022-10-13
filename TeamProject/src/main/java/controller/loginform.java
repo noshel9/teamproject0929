@@ -30,7 +30,14 @@ public class loginform extends HttpServlet {
 			throws ServletException, IOException {
 	
 //		loginAction.getRequestDispatcher("/member.loginMeber.jsp").forward(request, response);
+		
+		if(request.getParameter("log") != null) {
 		loginAction(request, response);
+		}
+		
+		if(request.getParameter("fpw") != null) {
+			FindAction(request, response);
+		}
 		
 	}
 	
@@ -61,6 +68,23 @@ public class loginform extends HttpServlet {
 		
 	}
 	
+	public void FindAction(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {		
+		
+		
+		
+		String id = request.getParameter("id");
+		String findpw = request.getParameter("findpass");
+		
+		MemberDAO dao = new MemberDAO();
+		List<MemberDTO> list = null;
+		list=dao.getpwfindDTO(id, findpw);
+		
+		request.setAttribute ("dto", list);
+		request.getRequestDispatcher("loginMember.jsp").forward(request, response);
+		
+		
+	}
 	
 
 }
