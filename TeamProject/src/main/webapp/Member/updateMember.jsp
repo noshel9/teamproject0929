@@ -5,10 +5,14 @@
 <html>
 <head>
 <script type="text/javascript">
-
+<% String UserId = (String) session.getAttribute("UserId"); %>
 	function checkForm() {
 		if (!document.newMember.id.value) {
 			alert("아이디를 입력하세요.");
+			return;
+		}
+		if('<%=UserId%>' != document.newMember.id.value){
+			alert("아이디를 다시 입력해주세요.");
 			return;
 		}
 		if (!document.newMember.pass.value) {
@@ -17,12 +21,13 @@
 		}
 		if (document.newMember.pass.value != document.newMember.pw_confirm.value) {
 			alert("비밀번호가 일치하지 않습니다.");
+			document.newMember.pw_confirm.value='';			
 			return;
 		}
 		document.newMember.submit();
 	}
 </script>
-<% String UserId = (String) session.getAttribute("UserId"); %>
+
 <sql:setDataSource var="dataSource" url="jdbc:mysql://localhost:3306/marketnavi"
 	driver="com.mysql.jdbc.Driver" user="root" password="1234" />
 <sql:query dataSource="${dataSource}" var="resultSet" >
@@ -33,15 +38,13 @@
 
 <title>회원 수정</title>
 </head>
-<body onload="init()">
+<body>
 	<jsp:include page="menu.jsp" />
 	<div class = "jumbotron" >
 		<div class = "container">
 			<h1 class = "display-3">회원 수정</h1>
 		</div>
-	</div>	
-
-
+	</div>
 	
 	<div class="container">
 		<form name="newMember" action="updateMemberform.do" method="post"  

@@ -47,7 +47,7 @@
 .overlaybox li .count {position:absolute;margin-top:5px;right:15px;font-size:10px;}
 .overlaybox li:hover {color:#fff;background:#d24545;}
 .overlaybox li:hover .up {background-position:0 0px; width: 95%;}
-.overlaybox li:hover .down {background-position:0 -20px;}  
+.overlaybox li:hover .down {background-position:0 -20px;}
 
 /*
 .info-titles {
@@ -65,3 +65,16 @@
 .hide{
 	visibility: hidden;
 }
+#good tbody tr td{
+	vertical-align: middle;
+}
+.selectReply:not(.table table-bordered){
+	vertical-align: middle;
+}
+.reply:not(.table table-bordered){
+	/* border-style: dashed;
+	border-width: 2px;	
+	border-color: red; */
+	display: none;
+}
+

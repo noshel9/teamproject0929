@@ -1,3 +1,5 @@
+<%@page import="model1.board.ReplyDTO"%>
+<%@page import="model1.board.ReplyDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,14 +14,16 @@
 	BoardDAO dao = new BoardDAO();
 	dao.updateVisitCount(num); // 조회수 카운트
 	
-	BoardDTO dto = dao.selectView(num);
-	
+	BoardDTO dto = dao.selectView(num);	
 	CommentDAO cdao = new CommentDAO();
+	ReplyDAO rdao = new ReplyDAO();
 	
-	List<CommentDTO> list = cdao.selectComment(num);	
+	List<CommentDTO> list = cdao.selectComment(num);
+	List<ReplyDTO> ReplyList = rdao.selectReply(num);
 	dao.close();
-	System.out.println("리스트 크기 : "+list.size());
+	//System.out.println("리스트 크기 : "+list.size());
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,6 +44,7 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
+<link rel = "stylesheet" href="../resource/css/NewFile.css">
 <form name="writeFrm" style="padding: 1% 20%;">
 	<input type="hidden" name="num" value="<%=num%>">		
 			<table class="table table-bordered">
@@ -79,16 +84,64 @@
 <div>
 <div style="text-align: center;">
 <form action="ListModel.li">
-<textarea name="comment" ></textarea>
+<textarea name="comment" style="width: 60%; height: 100px;" ></textarea>
 <input type="hidden" name="num" value="<%=num%>">
-<input type="submit" value="전송">	
-</form>
-<%for(int i=0; i<list.size(); i++){ %>
-<%=list.get(i).getId() %> : 
-<%=list.get(i).getContent() %>
-<a href="ListModel.li?deletePK=<%=list.get(i).getDeletePK()%>&&num=<%=num%>">삭제</a>
-<%} %></div></div>
-
+</br>
+<input class="btn btn-primary " type="submit" value="댓글 쓰기">	
+</form>	
+</br>
+</div>
+<div><div>
+<table class="table table-bordered" style="width: 60%; margin: auto;">
+<%for(int i=0; i<list.size(); i++){ %> 	
+		<tr>
+			<td style="width: 7%; vertical-align: middle; text-align: center;"><%=list.get(i).getId() %></td>
+			<td class="selectReply" colspan="3" height="100"><%=list.get(i).getContent().replaceAll("\r\n", "<br/>")%>
+				<%				
+				for(int j=0; j<ReplyList.size(); j++){					
+					if(list.get(i).getDeletePK()==ReplyList.get(j).getSelectPK()){					
+				%>
+					 <div style="color: blue;"><%=ReplyList.get(j).getId()%> : <%=ReplyList.get(j).getContent().replaceAll("\r\n", "<br/>")%>
+					 <%if(session.getAttribute("UserId") != null && session.getAttribute("UserId").toString().equals(ReplyList.get(j).getId())){ %>
+					 <a style="color: red" href="ListModel.li?replyDelete=<%=ReplyList.get(j).getDeletePK()%>&&num=<%=num%>">삭제</a>
+					 <%} %>
+					 </div>					 
+				<%}}%>
+				<div class="reply" style="display: none;">
+					<form name="frm<%=i%>" method="post" action="ListModel.li?insertReply=insertReply">
+						<textarea class="table table-bordered" name="content" style="width: 100%; height: 100px;"></textarea>						
+						<input type="hidden" name="selectPK" value="<%=list.get(i).getDeletePK()%>">
+						<input type="hidden" name="num" value="<%=num%>">
+						<input type="hidden" name="i" value="<%=i%>">
+						<input class="btn btn-secondary " type="submit" value="답글 달기">
+						<input class="btn btn-danger " type="button" value="닫기" onclick="replyClose();">
+					</form>
+				</div>
+			</td>	
+			<%if(session.getAttribute("UserId").toString().equals(list.get(i).getId())){ %>
+			<td style="width: 5%; vertical-align: middle; text-align: center;"><a class="btn btn-danger btn-sm" href="ListModel.li?deletePK=<%=list.get(i).getDeletePK()%>&&num=<%=num%>">삭제</a></td>	
+		<%} %>
+		</tr>
+<%} %></table></div></div>
+<script type="text/javascript">
+	var select = document.querySelectorAll(".selectReply");
+	var reply = document.querySelectorAll(".reply");	
+	
+	for(var i = 0; i<select.length; i++){		
+		select[i].addEventListener("click" , function(e) {			
+			console.log(this.children.length);					
+  			if(this.children[this.children.length-1].attributes[1].nodeValue == 'display: none;'){  				
+  				this.children[this.children.length-1].attributes[1].nodeValue = 'display: block;';		
+			}else if(this.children[this.children.length-1].attributes[1].nodeValue == 'display: block;'){	
+					
+			}		 	 
+		});		
+	}
+	console.log(document.frm4.i.value);
+	function replyClose() {
+		
+	}
+	</script>
 <jsp:include page="BotList.jsp" />
 </body>
 </html>

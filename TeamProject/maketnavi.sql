@@ -5,6 +5,7 @@ select * from uploaddata;
 select * from board;
 select * from member;
 select * from comment;
+select * from reply;
 
 create table member(
 id varchar(10) not null,
@@ -59,6 +60,16 @@ primary key (deletePK)
 drop table comment;
 insert into comment (num, content, id) VALUES(1, '1234', 'ssh');
 insert into comment (num, content, id) VALUES(2, '2222', 'ssh');
+    
+create table reply(
+deletePK int not null auto_increment,
+selectPK int not null, -- 댓글을 찾아가려고 만든 칼럼
+num int not null,
+content varchar(2000) not null,
+id varchar(10) not null,
+postdate datetime default(sysdate()),
+primary key (deletePK)
+);
     
 SHOW VARIABLES LIKE 'event%';	
 SET GLOBAL event_scheduler = on;

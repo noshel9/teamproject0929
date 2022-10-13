@@ -16,6 +16,8 @@ import model1.board.BoardDAO;
 import model1.board.BoardDTO;
 import model1.board.CommentDAO;
 import model1.board.CommentDTO;
+import model1.board.ReplyDAO;
+import model1.board.ReplyDTO;
 
 @WebServlet("/ListModel")
 public class ListModel extends HttpServlet {
@@ -36,8 +38,9 @@ public class ListModel extends HttpServlet {
 		if(request.getParameter("deletePK") != null) {
 			deleteComment(request, response);
 		}
-
-					
+		if(request.getParameter("replyDelete") != null) {
+			deleteReply(request, response);
+		}				
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,6 +57,10 @@ public class ListModel extends HttpServlet {
 		if(request.getParameter("comment") != null) {
 			insertComment(request, response);			
 		}
+		if(request.getParameter("insertReply") != null) {
+			insertReply(request, response);			
+		}
+		
 	}
 	
 	public void ListPageNation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -262,6 +269,38 @@ public class ListModel extends HttpServlet {
 		CommentDAO dao = new CommentDAO();	
 		
 		dao.deleteComment(Integer.parseInt(deletePK),id);
+		response.sendRedirect("View.jsp?num="+num);
+	}
+	
+	public void insertReply(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();		
+		String num = request.getParameter("num");
+		String selectPK = request.getParameter("selectPK");
+		String content = request.getParameter("content");
+		String id = (String) session.getAttribute("UserId");		
+		
+		ReplyDAO dao = new ReplyDAO();
+		ReplyDTO dto = new ReplyDTO();
+		dto.setContent(content);
+		dto.setId(id);
+		dto.setNum(Integer.parseInt(num));
+		dto.setSelectPK(Integer.parseInt(selectPK));
+		dao.insertReply(dto);
+		
+		response.sendRedirect("View.jsp?num="+num);
+		
+		dao.close();		
+	}
+	
+	public void deleteReply(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();	
+		String deletePK = request.getParameter("replyDelete");
+		String num = request.getParameter("num");
+		String id = (String) session.getAttribute("UserId");
+		
+		ReplyDAO dao = new ReplyDAO();	
+		
+		dao.deleteReply(Integer.parseInt(deletePK),id);
 		response.sendRedirect("View.jsp?num="+num);
 	}
 }
