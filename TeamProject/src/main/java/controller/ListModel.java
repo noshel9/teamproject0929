@@ -277,7 +277,9 @@ public class ListModel extends HttpServlet {
 		String num = request.getParameter("num");
 		String selectPK = request.getParameter("selectPK");
 		String content = request.getParameter("content");
-		String id = (String) session.getAttribute("UserId");		
+		String scroll = request.getParameter("scroll");
+		String id = (String) session.getAttribute("UserId");
+			
 		
 		ReplyDAO dao = new ReplyDAO();
 		ReplyDTO dto = new ReplyDTO();
@@ -287,7 +289,7 @@ public class ListModel extends HttpServlet {
 		dto.setSelectPK(Integer.parseInt(selectPK));
 		dao.insertReply(dto);
 		
-		response.sendRedirect("View.jsp?num="+num);
+		response.sendRedirect("View.jsp?num="+num+"&&scroll="+scroll);
 		
 		dao.close();		
 	}

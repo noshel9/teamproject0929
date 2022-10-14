@@ -8,7 +8,7 @@
 <%@ page import="model1.board.CommentDTO" %>
 <%@ page import="model1.board.CommentDAO" %>
 <%
-	String num = request.getParameter("num");
+	String num = request.getParameter("num");	
 	//String pageNum = request.getParameter("pageNum");	
 	//System.out.println("페이지 넘 : " + pageNum);
 	BoardDAO dao = new BoardDAO();
@@ -29,7 +29,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 게시판</title>
-<script type="text/javascript">
+<script type="text/javascript">	
 	function deletePost() {
 		var confirmed = confirm("정말로 삭제하시겠습니까?");
 		if(confirmed){
@@ -93,6 +93,7 @@
 </div>
 <div><div>
 <table class="table table-bordered" style="width: 60%; margin: auto;">
+
 <%for(int i=0; i<list.size(); i++){ %> 	
 		<tr>
 			<td style="width: 7%; vertical-align: middle; text-align: center;"><%=list.get(i).getId() %></td>
@@ -103,18 +104,17 @@
 				%>
 					 <div style="color: blue;"><%=ReplyList.get(j).getId()%> : <%=ReplyList.get(j).getContent().replaceAll("\r\n", "<br/>")%>
 					 <%if(session.getAttribute("UserId") != null && session.getAttribute("UserId").toString().equals(ReplyList.get(j).getId())){ %>
-					 <a style="color: red" href="ListModel.li?replyDelete=<%=ReplyList.get(j).getDeletePK()%>&&num=<%=num%>">삭제</a>
+					 <a style="color: red" href="ListModel.li?replyDelete=<%=ReplyList.get(j).getDeletePK()%>&&num=<%=num%>" >삭제</a>
 					 <%} %>
 					 </div>					 
 				<%}}%>
 				<div class="reply close">
-					<form name="frm<%=i%>" method="post" action="ListModel.li?insertReply=insertReply">
+					<form name="frm" method="post" action="ListModel.li?insertReply=insertReply">
 						<textarea class="table table-bordered" name="content" style="width: 100%; height: 100px;"></textarea>						
 						<input type="hidden" name="selectPK" value="<%=list.get(i).getDeletePK()%>">
 						<input type="hidden" name="num" value="<%=num%>">
-						<input type="hidden" name="i" value="<%=i%>">
-						<input type="hidden" name="scroll" value="1">
-						<input class="btn btn-secondary " type="button" value="답글 달기" onclick="scrollSelect();">
+						<input type="hidden" name="i" value="<%=i%>">						
+						<input class="btn btn-secondary " type="button" value="답글 달기" onclick="scrollSelect(<%=i%>);">
 						<!-- <input class="btn btn-danger " type="button" name="close" value="닫기" onclick="replyClose();"> -->
 					</form>
 				</div>
@@ -127,15 +127,19 @@
 		<%} %>
 		</tr>
 <%} %></table></div></div>
+<jsp:include page="BotList.jsp" />
+
 <script type="text/javascript">
-	var scroll = window.scrollY;
+	scrollTo(0,sessionStorage.scroll);	
 	var select = document.querySelectorAll(".selectReply");
-	//var reply = document.querySelectorAll(".reply");
-	window.addEventListener('scroll', function(){
-	        console.log("scrollY: ", window.scrollY)			   
-	    })
+	var reply = document.querySelectorAll(".reply");
 	
-	function replyOpen(event) {		
+	window.addEventListener('scroll',()=> {	
+		//console.log(window.scrollY);
+				sessionStorage.scroll = window.scrollY; 
+	})
+	
+	function replyOpen() {		
 		
 		for(var i = 0; i<select.length; i++){		
 			select[i].addEventListener("click" , function(e) {							
@@ -149,18 +153,17 @@
 		for(var i=0; i<select.length; i++){
 			//console.log(reply);			
 			select[i].addEventListener("click" , function(e) {
-				console.log(this.children[this.children.length-4]);
+				//console.log(this.children[this.children.length-4]);
 				this.children[this.children.length-4].classList.add('close');				
 			});
 		}
-	}	
-	function scrollSelect() {
-		
-		
+	}
+ 	    
+	function scrollSelect(num) {				
+		document.frm[num].submit();
+		return; 
 	}
 
-	
 	</script>
-<jsp:include page="BotList.jsp" />
 </body>
 </html>
