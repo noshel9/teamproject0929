@@ -10,10 +10,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="Map.map?Keyword=Keyword">
-<input type="text" name=keyword>
-<input type="submit" value="전송">
-</form>
 <jsp:include page="menu.jsp" />
 <div class="map_wrap">
     <div id="map" style="width:100%;height:250%;position:relative;overflow:hidden; margin: auto;"></div>
@@ -21,7 +17,12 @@
         <li id="CS2" data-order="5" onclick="onClickCategory();"> 
             <span class="category_bg store" ></span>
             편의점
-        </li>      
+        </li>  
+                        <div>
+<form action="Map.map?Keyword=Keyword">
+<input type="text" name=keyword>
+<input type="submit" value="전송">
+</form></div>    
     </ul>
 </div>
 <p><em>지도를 클릭해주세요!</em></p> 

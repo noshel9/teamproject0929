@@ -32,13 +32,15 @@ public class updateMemberform extends HttpServlet {
 		String pass = request.getParameter("pass");
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
+		String pwfind = request.getParameter("pwfind");
+		String phone = request.getParameter("phone");
 		
-		//Date currentDatetime = new Date(System.currentTimeMillis());
-		//java.sql.Date sqlDate = new java.sql.Date(currentDatetime.getTime());
-		//java.sql.Timestamp timestamp = new java.sql.Timestamp(currentDatetime.getTime()); 
+		Date currentDatetime = new Date(System.currentTimeMillis());
+		java.sql.Date sqlDate = new java.sql.Date(currentDatetime.getTime());
+		java.sql.Timestamp timestamp = new java.sql.Timestamp(currentDatetime.getTime()); 
 		
 		MemberDAO dao = new MemberDAO();
-		dao.getupdateMemberDTO(id, pass, name,  address);
+		MemberDTO memberDTO = dao.getupdateMemberDTO(id, pass, name, address, pwfind, phone);
 		
 		response.sendRedirect("/TeamProject/Member/resultMember.jsp?msg=0");
 		

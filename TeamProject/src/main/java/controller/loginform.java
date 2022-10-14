@@ -30,7 +30,18 @@ public class loginform extends HttpServlet {
 			throws ServletException, IOException {
 	
 //		loginAction.getRequestDispatcher("/member.loginMeber.jsp").forward(request, response);
+		
+		if(request.getParameter("log") != null) {
 		loginAction(request, response);
+		}
+		
+		if(request.getParameter("fpw") != null) {
+			FindAction(request, response);
+		}
+		
+		if(request.getParameter("findid") != null) {
+			FindIdAction(request,response);
+		}
 		
 	}
 	
@@ -61,6 +72,37 @@ public class loginform extends HttpServlet {
 		
 	}
 	
+	public void FindAction(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {		
+		
+		
+		
+		String id = request.getParameter("id");
+		String findpw = request.getParameter("findpass");
+		
+		MemberDAO dao = new MemberDAO();
+		List<MemberDTO> list = null;
+		list=dao.getpwfindDTO(id, findpw);
+		
+		request.setAttribute ("dto", list);
+		request.getRequestDispatcher("loginMember.jsp").forward(request, response);
+		
+		
+	}
+	
+	public void FindIdAction(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {		
+		
+		String findpw = request.getParameter("findpass");
+		String phone = request.getParameter("phone");
+		
+		MemberDAO dao = new MemberDAO();
+		List<MemberDTO> list = null;
+		list=dao.getIdfindDTO(findpw, phone);
+		
+		request.setAttribute("dtto", list);
+		request.getRequestDispatcher("PwfindMember.jsp").forward(request, response);
+	}
 	
 
 }

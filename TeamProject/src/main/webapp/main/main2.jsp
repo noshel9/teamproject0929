@@ -60,7 +60,7 @@
                 	<li><a href="../Member/updateMember.jsp">회원수정</a>
                     <li><a href="../map.jsp">제보하기</a></li>
                     <li><a href="../Map.map?outputmap=outputmap" onclick="return chek();">편케팅!</a></li>
-                    <li><a href="../Board/BotList.jsp">건의 게시판</a></li>
+                    <li><a href="../Board/ListModel.li?List=List">건의 게시판</a></li>
                     
                  </c:otherwise>
                  </c:choose>

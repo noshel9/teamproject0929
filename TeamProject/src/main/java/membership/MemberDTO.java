@@ -6,7 +6,8 @@ public class MemberDTO {
 	private String name;
 	private String regidate;
 	private String address;
-	private String pwfind;	
+	private String pwfind;
+	private String phone;
 	
 	public String getPwfind() {
 		return pwfind;
@@ -44,6 +45,12 @@ public class MemberDTO {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 }

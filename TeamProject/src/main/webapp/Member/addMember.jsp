@@ -67,6 +67,18 @@
 				</div>
 			</div>
 			<div class="form-group row">
+				<label class="col-sm-2">비밀번호 찾기</label>
+				<div class="col-sm-5">
+					<input type="text" name="pwfind" class="form-control" placeholder="비밀번호 찾기할시 힌트">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2">휴대전화 번호</label>
+				<div class="col-sm-5">
+					<input type="text" name="phone" class="form-control" placeholder="휴대전화 번호">
+				</div>
+			</div>
+			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10"> 
 					<input type="button" class="btn btn-primary" value="등록" onclick="checkForm();">
 					<input type="reset" class="btn btn-primary" value="취소" onclick="reset()">

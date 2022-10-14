@@ -20,6 +20,8 @@ primary key (id)
 -- alter table member drop tel;
 -- alter table member drop addr;
 -- alter table member add address varchar(50) not null;
+alter table member add pwfind varchar(200);
+alter table member add phone varchar(20);
 drop table member;
 
 create table uploaddata(
@@ -63,7 +65,7 @@ insert into comment (num, content, id) VALUES(2, '2222', 'ssh');
     
 create table reply(
 deletePK int not null auto_increment,
-selectPK int not null, -- ´ñ±ÛÀ» Ã£¾Æ°¡·Á°í ¸¸µç Ä®·³
+selectPK int not null, -- ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä®ï¿½ï¿½
 num int not null,
 content varchar(2000) not null,
 id varchar(10) not null,

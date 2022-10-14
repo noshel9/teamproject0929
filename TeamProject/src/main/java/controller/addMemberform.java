@@ -27,13 +27,15 @@ public class addMemberform extends HttpServlet {
 		String pass = request.getParameter("pass");
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
+		String pwfind = request.getParameter("pwfind");
+		String phone = request.getParameter("phone");
 		
 		//Date currentDatetime = new Date(System.currentTimeMillis());
 		//java.sql.Date sqlDate = new java.sql.Date(currentDatetime.getTime());
 		//java.sql.Timestamp timestamp = new java.sql.Timestamp(currentDatetime.getTime());
 		
 		MemberDAO dao = new MemberDAO();
-		dao.getaddMemberDTO(id, pass, name, address);
+		dao.getaddMemberDTO(id, pass, name, address, pwfind, phone);
 //				getaddMemberDTO(id, pass, name,  address, timestamp, 0 );
 	
 		response.sendRedirect("/TeamProject/Member/resultMember.jsp?msg=1");
