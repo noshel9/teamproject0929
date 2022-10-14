@@ -39,6 +39,10 @@ public class loginform extends HttpServlet {
 			FindAction(request, response);
 		}
 		
+		if(request.getParameter("findid") != null) {
+			FindIdAction(request,response);
+		}
+		
 	}
 	
 
@@ -84,6 +88,20 @@ public class loginform extends HttpServlet {
 		request.getRequestDispatcher("loginMember.jsp").forward(request, response);
 		
 		
+	}
+	
+	public void FindIdAction(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {		
+		
+		String findpw = request.getParameter("findpass");
+		String phone = request.getParameter("phone");
+		
+		MemberDAO dao = new MemberDAO();
+		List<MemberDTO> list = null;
+		list=dao.getIdfindDTO(findpw, phone);
+		
+		request.setAttribute("dtto", list);
+		request.getRequestDispatcher("PwfindMember.jsp").forward(request, response);
 	}
 	
 

@@ -10,20 +10,20 @@
 <link rel="stylesheet" href="../resource/css/Member.css">
 	<%
 		List<MemberDTO> fw = (List<MemberDTO>)request.getAttribute("dto") ;
-	System.out.println(fw);
+
 		if(fw != null){			
-		//System.out.println("fw: " + fw.get(fw.size()-1).getPass());?
+
 		if(fw.size() != 0){
 	%>	
 	<script type="text/javascript">
 	function dd() {
-		alert("비밀번호는 : "+ <%=fw.get(0).getPass()%>);
+		alert('비밀번호는 : <%=fw.get(0).getPass()%>');
 	}		
 	</script>	
 	<% }else{%>		
 	<script type="text/javascript">	
 		function cc() {
-		alert("비밀번호를 찾을수없습니다.");	
+		alert("비밀번호를 찾을 수 없습니다.");	
 		}		
 	</script>
 		<%} 
@@ -82,7 +82,7 @@
 				String action="loginform.do?log=log";
 			%>
 			
-			<form class="form-signin" action="<%=action %>" method="post">
+			<form class="form-signin" action="<%= action %>" method="post">
 				<div class="form-group">
 					<label for="inputUserName" class="sr-only">User Name</label>
 					<input type="text" class="form-control" id="idlog" placeholder="ID" 
@@ -98,11 +98,12 @@
 			</form>
 		</div>
 	</div>
-
+	<div>
 		<ul class="find" style="list-style:none; display:inline; text-a">
 			<li><a href="PwfindMember.jsp" style="float:left; margin-left:20px; ">비밀번호 찾기</a></li>
-			<li><a href="#"	style="float:left; margin-left:20px; ">아이디 찾기</a></li>
-			</ul>
-
+			<li><a href="IdfindMember.jsp"	style="float:left; margin-left:20px; ">아이디 찾기</a></li>
+			
+	</ul>
+	</div>
 </body>
 </html>

@@ -88,6 +88,13 @@
 					value="<c:out value='${row.pwfind}'/>">
 				</div>
 			</div>
+		<div class="form-group row">
+				<label class="col-sm-2">휴대전화 번호</label>
+				<div class="col-sm-5">
+					<input type="text" name="phone" class="form-control" placeholder="휴대전화 번호"
+					value="<c:out value='${row.phone}'/>">
+				</div>
+			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
 					<input type="button" class="btn btn-primary" value="회원수정" onclick="checkForm();">

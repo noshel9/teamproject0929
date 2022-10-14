@@ -1,8 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="membership.MemberDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
+<%
+		List<MemberDTO> idf = (List<MemberDTO>)request.getAttribute("dtto") ;
+	System.out.println(idf);
+		if(idf != null){			
+		//System.out.println("fw: " + idf.get(idf.size()-1).getId());
+		if(idf.size() != 0){
+			System.out.println("fw: " + idf.get(idf.size()-1).getId());
+	%>	
+	<script type="text/javascript">
+
+	function dd() {
+<%-- 		alert("아이디는 : "+ <%=idf.get(0).getId()%>); --%>
+		alert('아이디는 : <%=idf.get(0).getId()%>');
+	}		
+	</script>	
+	<% }else{%>		
+	<script type="text/javascript">	
+		function cc() {
+		alert("아이디 를 찾을 수 없습니다.");	
+		}		
+	</script>
+		<%} 
+		}
+		if(idf != null){			
+		
+	%>
+	<script type="text/javascript">
+	//console.log(dd());
+		if(typeof dd !== "undefined") setTimeout(dd, 200);
+		if(typeof cc !== "undefined") setTimeout(cc, 200);
+	</script>
+	<%
+		}
+			
+	%>
+	
+
+
 <script type="text/javascript">
 	function back(){
 		document.find_pw.action='loginMember.jsp';
@@ -11,8 +51,8 @@
 		
 	}
 </script>
-<meta charset="UTF-8">
-<title></title>
+<<meta charset="UTF-8">
+<<title></title>
 </head>
 <body>
 <%
