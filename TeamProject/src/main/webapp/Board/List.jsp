@@ -32,7 +32,7 @@ String pageNum_chk_e = request.getAttribute("pageNum_chk_e").toString();
 int totalCount = Integer.parseInt(request.getAttribute("totalCount").toString());
 List<BoardDTO> boardLists = (List<BoardDTO>)request.getAttribute("boardLists");
 %>
-<jsp:include page="menu.jsp"></jsp:include>
+<jsp:include page="Boardmenu.jsp"></jsp:include>
     <!-- 검색폼 --> 
     <form method="get" name="optionform">  
     <div style="padding: 1% 20%;">

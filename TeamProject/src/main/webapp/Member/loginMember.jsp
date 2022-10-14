@@ -10,7 +10,7 @@
 <title>Login</title>
 </head>
 <body>
-	<jsp:include page="menu.jsp" />
+	<jsp:include page="Membermenu.jsp" />
 	<div class="jumbotron">
 		<div class="container" align="center">
 			<h1 class="display-3">편케팅 로그인</h1>

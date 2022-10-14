@@ -43,7 +43,7 @@
 
 </head>
 <body>
-<jsp:include page="menu.jsp"></jsp:include>
+<jsp:include page="Boardmenu.jsp"></jsp:include>
 <link rel = "stylesheet" href="../resource/css/NewFile.css">
 <form name="writeFrm" style="padding: 1% 20%;">
 	<input type="hidden" name="num" value="<%=num%>">		
@@ -107,16 +107,20 @@
 					 <%} %>
 					 </div>					 
 				<%}}%>
-				<div class="reply" style="display: none;">
+				<div class="reply close">
 					<form name="frm<%=i%>" method="post" action="ListModel.li?insertReply=insertReply">
 						<textarea class="table table-bordered" name="content" style="width: 100%; height: 100px;"></textarea>						
 						<input type="hidden" name="selectPK" value="<%=list.get(i).getDeletePK()%>">
 						<input type="hidden" name="num" value="<%=num%>">
 						<input type="hidden" name="i" value="<%=i%>">
-						<input class="btn btn-secondary " type="submit" value="답글 달기">
-						<input class="btn btn-danger " type="button" value="닫기" onclick="replyClose();">
+						<input type="hidden" name="scroll" value="1">
+						<input class="btn btn-secondary " type="button" value="답글 달기" onclick="scrollSelect();">
+						<!-- <input class="btn btn-danger " type="button" name="close" value="닫기" onclick="replyClose();"> -->
 					</form>
 				</div>
+				<br>
+				<a class="cursor" onclick="replyOpen(event);" style="color: blue;">[열기]</a>
+				<a class="cursor" onclick="replyClose(event);" style="color: red;">[닫기]</a>
 			</td>	
 			<%if(session.getAttribute("UserId").toString().equals(list.get(i).getId())){ %>
 			<td style="width: 5%; vertical-align: middle; text-align: center;"><a class="btn btn-danger btn-sm" href="ListModel.li?deletePK=<%=list.get(i).getDeletePK()%>&&num=<%=num%>">삭제</a></td>	
@@ -124,23 +128,38 @@
 		</tr>
 <%} %></table></div></div>
 <script type="text/javascript">
+	var scroll = window.scrollY;
 	var select = document.querySelectorAll(".selectReply");
-	var reply = document.querySelectorAll(".reply");	
+	//var reply = document.querySelectorAll(".reply");
+	window.addEventListener('scroll', function(){
+	        console.log("scrollY: ", window.scrollY)			   
+	    })
 	
-	for(var i = 0; i<select.length; i++){		
-		select[i].addEventListener("click" , function(e) {			
-			console.log(this.children.length);					
-  			if(this.children[this.children.length-1].attributes[1].nodeValue == 'display: none;'){  				
-  				this.children[this.children.length-1].attributes[1].nodeValue = 'display: block;';		
-			}else if(this.children[this.children.length-1].attributes[1].nodeValue == 'display: block;'){	
-					
-			}		 	 
-		});		
+	function replyOpen(event) {		
+		
+		for(var i = 0; i<select.length; i++){		
+			select[i].addEventListener("click" , function(e) {							
+				console.log(this.children[this.children.length-4]);
+				this.children[this.children.length-4].classList.remove('close');				
+			});	
+		}	
 	}
-	console.log(document.frm4.i.value);
 	function replyClose() {
 		
+		for(var i=0; i<select.length; i++){
+			//console.log(reply);			
+			select[i].addEventListener("click" , function(e) {
+				console.log(this.children[this.children.length-4]);
+				this.children[this.children.length-4].classList.add('close');				
+			});
+		}
+	}	
+	function scrollSelect() {
+		
+		
 	}
+
+	
 	</script>
 <jsp:include page="BotList.jsp" />
 </body>

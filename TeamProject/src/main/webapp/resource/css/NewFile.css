@@ -74,7 +74,14 @@
 .reply:not(.table table-bordered){
 	/* border-style: dashed;
 	border-width: 2px;	
-	border-color: red; */
+	border-color: red; */	
+}
+
+.close{
 	display: none;
+}
+
+.cursor{
+	cursor: pointer;
 }
 
