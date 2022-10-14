@@ -33,7 +33,7 @@
 
 <title>회원 수정</title>
 </head>
-<body onload="init()">
+<body>
 	<jsp:include page="Membermenu.jsp" />
 	<div class = "jumbotron" >
 		<div class = "container">
@@ -46,10 +46,10 @@
 	<div class="container">
 		<form name="newMember" action="updateMemberform.do" method="post"  
 		class="form-horizontal">
-			<div class="form-group row">
-				<label class="col-sm-2">아이디</label>
+			<div class="form-group row">				
 				<div class="col-sm-3">
-					<input type="text" name="id" class="form-control" placeholder="id"
+				<input type="hidden" name= "id" class="form-control" value="<%=(String)session.getAttribute("UserId") %>" />
+					<input type="hidden" class="form-control" placeholder="id"
 						value="<c:out value='${row.id}'/>" />
 				</div>
 			</div>

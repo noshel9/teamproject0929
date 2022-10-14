@@ -99,22 +99,23 @@
 			<td style="width: 7%; vertical-align: middle; text-align: center;"><%=list.get(i).getId() %></td>
 			<td class="selectReply" colspan="3" height="100"><%=list.get(i).getContent().replaceAll("\r\n", "<br/>")%>
 				<%				
-				for(int j=0; j<ReplyList.size(); j++){					
+				for(int j=0; j<ReplyList.size(); j++){	
+					String id_hidden = ReplyList.get(j).getId();
 					if(list.get(i).getDeletePK()==ReplyList.get(j).getSelectPK()){					
 				%>
-					 <div style="color: blue;"><%=ReplyList.get(j).getId()%> : <%=ReplyList.get(j).getContent().replaceAll("\r\n", "<br/>")%>
+					 <div style="color: blue;">ㄴ<%=ReplyList.get(j).getId()%> : <%=ReplyList.get(j).getContent().replaceAll("\r\n", "<br/><a style=\"visibility:hidden;\">ㄴ"+id_hidden+" : </a>")%>
 					 <%if(session.getAttribute("UserId") != null && session.getAttribute("UserId").toString().equals(ReplyList.get(j).getId())){ %>
 					 <a style="color: red" href="ListModel.li?replyDelete=<%=ReplyList.get(j).getDeletePK()%>&&num=<%=num%>" >삭제</a>
-					 <%} %>
+					 <%} %>					 
 					 </div>					 
 				<%}}%>
 				<div class="reply close">
 					<form name="frm" method="post" action="ListModel.li?insertReply=insertReply">
-						<textarea class="table table-bordered" name="content" style="width: 100%; height: 100px;"></textarea>						
+						<textarea class="table table-bordered" name="content" style="width: 100%; height: 100px; margin-bottom: auto;"></textarea>						
 						<input type="hidden" name="selectPK" value="<%=list.get(i).getDeletePK()%>">
 						<input type="hidden" name="num" value="<%=num%>">
 						<input type="hidden" name="i" value="<%=i%>">						
-						<input class="btn btn-secondary " type="button" value="답글 달기" onclick="scrollSelect(<%=i%>);">
+						<input class="btn btn-secondary " type="submit" value="답글 달기">
 						<!-- <input class="btn btn-danger " type="button" name="close" value="닫기" onclick="replyClose();"> -->
 					</form>
 				</div>
@@ -158,12 +159,6 @@
 			});
 		}
 	}
- 	    
-	function scrollSelect(num) {				
-		document.frm[num].submit();
-		return; 
-	}
-
 	</script>
 </body>
 </html>

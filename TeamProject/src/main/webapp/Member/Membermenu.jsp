@@ -32,16 +32,8 @@
 						<li class="nav-item"><a class="nav-link" href='<c:url value="../Board/ListModel.li?List=List" />'>건의 게시판</a></li>
 					</c:otherwise>
 					</c:choose>
-					
-					
-
-				</ul>			
-					
-					
-					
-				
+				</ul>				
 			</div>
-			</div>
-		
+			</div>	
 	</nav>
 

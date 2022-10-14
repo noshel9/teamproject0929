@@ -1,6 +1,7 @@
 package model1.board;
 
-import java.sql.Date;
+//import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ReplyDTO {
 	private int deletePK;
@@ -8,7 +9,7 @@ public class ReplyDTO {
 	private int num;
 	private String content;
 	private String id;	
-	private Date postdate;
+	private Timestamp postdate;
 	
 	public int getDeletePK() {
 		return deletePK;
@@ -40,12 +41,13 @@ public class ReplyDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getPostdate() {
+	public Timestamp getPostdate() {
 		return postdate;
 	}
-	public void setPostdate(Date postdate) {
+	public void setPostdate(Timestamp postdate) {
 		this.postdate = postdate;
 	}
+
 	
 	
 }

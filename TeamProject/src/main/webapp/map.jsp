@@ -17,11 +17,14 @@
         <li id="CS2" data-order="5" onclick="onClickCategory();"> 
             <span class="category_bg store" ></span>
             편의점
-        </li>  
+        </li>
+        <li id="" data-order="4" >            
+            키워드 검색
+        </li>    
                         <div>
 <form action="Map.map?Keyword=Keyword">
 <input type="text" name=keyword>
-<input type="submit" value="전송">
+<input type="submit" value="검색">
 </form></div>    
     </ul>
 </div>

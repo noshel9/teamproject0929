@@ -52,10 +52,9 @@ public List<ReplyDTO> selectReply(String num) {
         	dto.setNum(rs.getInt("num"));                
             dto.setContent(rs.getString("content"));                
             dto.setId(rs.getString("id"));
-            dto.setPostdate(rs.getDate("postdate"));
+            dto.setPostdate(rs.getTimestamp("postdate"));
             dto.setDeletePK(rs.getInt("deletePK"));
-            list.add(dto);
-
+            list.add(dto);            
         }
     } 
     catch (Exception e) {
