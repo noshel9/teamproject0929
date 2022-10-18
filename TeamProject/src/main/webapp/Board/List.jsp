@@ -38,7 +38,8 @@ List<BoardDTO> boardLists = (List<BoardDTO>)request.getAttribute("boardLists");
 %>
 <jsp:include page="/menu.jsp"></jsp:include>
     <!-- 검색폼 -->
-    <div class="container" id="board_list">
+    <div class="wrap">
+    <div class="container box" id="board_list">
     <form method="get" name="optionform" >  
           	  <select name="searchField" onchange="changeFunc();" id="search1"> 
                 <option value="title">제목</option> 
@@ -103,25 +104,28 @@ if (boardLists == null || boardLists.size() == 0) {
     <div>
     <form action="ListModel.li?List=List" name="pageLeftForm" method="post" id="pageform">  
     <b><%=pageNum %>page</b><br/> 
-  <ul>
-    <li >    
+  </div>
+  <div class="wrap">   
+    <li>    
     <!-- <a href="List.jsp?pageLeft=L"><<</a> -->
     <input type="hidden" name="hdnbt" />
     <input type="hidden" name="pageNum" value="<%=pageNum%>" />
-      <input type="button" name="pageLeft" class="page-link" aria-label="Previous" value="<<" onclick="{document.pageLeftForm.hdnbt.value=this.value;document.pageLeftForm.submit();}">
-    </li>   
+      <input type="button" name="pageLeft" class="page-link" aria-label="Previous" value="<<" onclick="{document.pageLeftForm.hdnbt.value=this.value;document.pageLeftForm.submit();}">    
+    </li>
+    
 	<%
 	for(int i =Integer.parseInt(pageList_s); i<Integer.parseInt(pageList_e); i++){ // 페이지 리스트 버튼 출력		
 		%>		
-	<li class="pagination"><a class="active" href="ListModel.li?pageNum=<%=i%>"><%=i %></a></li>			
+	<li class="pagination box"><a class="active" href="ListModel.li?pageNum=<%=i%>"><%=i %></a></li>			
 	<%
 	}	
 	%>	
 	<input type="hidden" name="i" value="<%=pageList_e%>"/>	
 	<li class="page-item">      
       <input class="page-link"  type="submit" name="pageRight" value=">>">      
+    
     </li>
-  </ul>
+    </div>
     </form>
     </div>
 </body>
