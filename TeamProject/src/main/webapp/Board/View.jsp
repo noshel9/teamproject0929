@@ -23,7 +23,7 @@
 	dao.close();
 	//System.out.println("리스트 크기 : "+list.size());
 %>
-
+<link rel="stylesheet" href="../css/View.css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +45,8 @@
 <body>
 <jsp:include page="/menu.jsp"></jsp:include>
 <link rel = "stylesheet" href="../resource/css/NewFile.css">
-<form name="writeFrm" style="padding: 1% 20%;">
+<div class="wrap" style="margin-top: 120px;">
+<form name="writeFrm" class="box">
 	<input type="hidden" name="num" value="<%=num%>">		
 			<table class="table table-bordered">
 		<tr>
@@ -81,6 +82,7 @@
 		</tr>		
 	</table>
 </form>
+</div>
 <div>
 <div style="text-align: center;">
 <form action="ListModel.li">

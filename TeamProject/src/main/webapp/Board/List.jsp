@@ -6,8 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
 <link rel="stylesheet" href="../css/List.css">
 
 <meta charset="UTF-8">
@@ -15,11 +13,16 @@
 <script type="text/javascript">
  function changeFunc(){ // 내가쓴글 검색할때 인풋 텍스트 비활성화 스크릡트	
 	if(document.optionform.searchField.value == "id2"){
-	  document.optionform.searchWord.disabled = true;	
+	  document.optionform.searchWord.disabled = true;
+	  document.optionform.action = "ListModel.li?List=List"
+		  document.optionform.submit();
 	}else{
 		document.optionform.searchWord.disabled = false;
-	}		
+		  document.optionform.action = "ListModel.li?List=List"
+			  document.optionform.submit();
+	}	
  }
+
 </script>
 </head>
 <body>
@@ -41,16 +44,20 @@ List<BoardDTO> boardLists = (List<BoardDTO>)request.getAttribute("boardLists");
     <div class="wrap">
     <div class="container box" id="board_list">
     <form method="get" name="optionform" >  
-          	  <select name="searchField" onchange="changeFunc();" id="search1"> 
+          	  <select name="searchField" id="search1"> 
                 <option value="title">제목</option> 
                 <option value="content">내용</option>
                 <option value="id" >작성자</option>
                 <option value="id2">내글보기</option>
            	 </select>
             <input class="form" type="text" name="searchWord" id="search2"/>            
-            <input type="submit" value="검색하기" id="search3"/>
-  
+            <input type="button" value="검색하기" id="search3" onclick="changeFunc();"/>  
     </form>
+    <script type="text/javascript">
+    if("<%=request.getAttribute("searchField")%>" == "id2" ){    	
+    	document.querySelector("#search2").attributes.class.ownerElement.disabled = true;
+    }
+    </script>
     <!-- 게시물 목록 테이블(표) -->     
     <table class="table">
         <!-- 각 칼럼의 이름 --> 
@@ -103,7 +110,7 @@ if (boardLists == null || boardLists.size() == 0) {
     </table>  
     <div>
     <form action="ListModel.li?List=List" name="pageLeftForm" method="post" id="pageform">  
-    <b><%=pageNum %>page</b><br/> 
+    <%-- <b><%=pageNum %>page</b> --%><br/> 
   </div>
   <div class="wrap">   
     <li>    
@@ -116,7 +123,7 @@ if (boardLists == null || boardLists.size() == 0) {
 	<%
 	for(int i =Integer.parseInt(pageList_s); i<Integer.parseInt(pageList_e); i++){ // 페이지 리스트 버튼 출력		
 		%>		
-	<li class="pagination box"><a class="active" href="ListModel.li?pageNum=<%=i%>"><%=i %></a></li>			
+	<li class="pagination box"><a class="active" onmouseover="active_over(<%=i%>);" onmouseout="active_out(<%=i%>);" href="ListModel.li?pageNum=<%=i%>"><%=i %></a></li>			
 	<%
 	}	
 	%>	
@@ -129,4 +136,25 @@ if (boardLists == null || boardLists.size() == 0) {
     </form>
     </div>
 </body>
+<script type="text/javascript">
+
+function active_over(num) {	
+	if(num!=<%=pageNum%>){
+		document.querySelectorAll('.active')[num-1].style.backgroundColor = 'white';
+		document.querySelectorAll('.active')[num-1].style.color = 'tomato';
+	}
+}
+function active_out(num) {
+	if(num!=<%=pageNum%>){
+		document.querySelectorAll('.active')[num-1].style.backgroundColor ='tomato'; 
+		document.querySelectorAll('.active')[num-1].style.color = 'white';
+	}
+}
+
+document.querySelectorAll('.active')[<%=pageNum%>-1].style.backgroundColor = 'white';
+document.querySelectorAll('.active')[<%=pageNum%>-1].style.color = 'tomato';
+
+</script> 
 </html>
+
+

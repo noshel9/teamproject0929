@@ -26,7 +26,8 @@ public class ListModel extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		if(request.getParameter("List")!=null || request.getParameter("pageNum")!= null) {
+		if (request.getParameter("List") != null || request.getParameter("pageNum") != null 
+				|| request.getParameter("searchWord")!= null || request.getParameter("searchField")!= null) {
 			ListPageNation(request, response);
 		
 		}
@@ -66,9 +67,10 @@ public class ListModel extends HttpServlet {
 	public void ListPageNation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardDAO dao = new BoardDAO();
 		HttpSession session = request.getSession();
-		// 사용자가 입력한 검색 조건을 Map에 저장
+		// 사용자가 입력한 검색 조건을 Map에 저장		
 		Map<String, Object> param = new HashMap<String, Object>();
 		String searchField = request.getParameter("searchField");
+		request.setAttribute("searchField", searchField);
 		String searchWord = request.getParameter("searchWord");
 		String pageNum = request.getParameter("pageNum"); // 페이지 리스트의 넘버
 		String pageLeft = request.getParameter("hdnbt");	// 이전 버튼 동작 여부 확인용

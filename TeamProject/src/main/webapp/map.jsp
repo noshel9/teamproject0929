@@ -1,12 +1,12 @@
 <%@page import="membership.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel = "stylesheet" href="resource/css/NewFile.css">
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel = "stylesheet" href="resource/css/NewFile.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -31,7 +31,7 @@
 <p><em>지도를 클릭해주세요!</em></p> 
 <div id="clickLatlng"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=def47418c26c1b2e8383afc08b8370c5&libraries=services,clusterer"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c4aacc8d54e6eb52e719965ff48e1393&libraries=services,clusterer"></script>
 
 <script>
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
@@ -59,9 +59,10 @@ var clusterer = new kakao.maps.MarkerClusterer({
 <%
 String space = "\"\"";
 String keyword_ = "\""+request.getParameter("keyword")+"\"";
+System.out.println(keyword_);
 %>
 var keyword = <%=request.getParameter("keyword")==null ? space : keyword_%>;
-
+console.log(keyword);
 //HTML5의 geolocation으로 사용할 수 있는지 확인합니다
 if (navigator.geolocation && keyword == '') { 
  // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -127,7 +128,7 @@ function displayMarker(locPosition, message) {
 var ps = new kakao.maps.services.Places(map); 
 
 // 지도에 idle 이벤트를 등록합니다 ..> 이게 문제 였음, 키워드 화면 전환 에러
-if(keyword == '')kakao.maps.event.addListener(map, 'idle', searchPlaces);
+if(keyword == '') kakao.maps.event.addListener(map, 'idle', searchPlaces);
 
 // 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
 contentNode.className = 'placeinfo_wrap';

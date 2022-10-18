@@ -4,20 +4,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel = "stylesheet" href="resource/css/NewFile.css">
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel = "stylesheet" href="resource/css/NewFile.css">
 <body>
 <jsp:include page="menu.jsp" />
 <!-- 지도를 표시할 div 입니다 -->
 <div id="map" style="width:100%;height:94%;"></div>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=def47418c26c1b2e8383afc08b8370c5&libraries=services,drawing,clusterer"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c4aacc8d54e6eb52e719965ff48e1393&libraries=services,drawing,clusterer"></script>
 
 <%
 String list= request.getAttribute("UploadDTO").toString();
@@ -61,8 +61,7 @@ var clusterer = new kakao.maps.MarkerClusterer({
 }); */
 
 //HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-if (navigator.geolocation) {
-    
+if (navigator.geolocation) {    
     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
     navigator.geolocation.getCurrentPosition(function(position) {
         
@@ -77,8 +76,7 @@ if (navigator.geolocation) {
             
       });
     
-} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-    
+} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다    
     var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
         message = 'geolocation을 사용할수 없어요..'
         
