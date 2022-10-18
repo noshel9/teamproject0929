@@ -4,6 +4,8 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="../dist/fullpage.css" />
+<link rel="stylesheet" type="text/css" href="../css/updateMember.css" />
 <script type="text/javascript">
 
 	function checkForm() {
@@ -29,23 +31,19 @@
 	select * from member where id=?
 	<sql:param value="<%=UserId %>" />
 </sql:query>
-<link rel = "stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">	
-
 <title>회원 수정</title>
 </head>
 <body>
-	<jsp:include page="Membermenu.jsp" />
-	<div class = "jumbotron" >
-		<div class = "container">
-			<h1 class = "display-3">회원 수정</h1>
-		</div>
-	</div>	
 
+	<jsp:include page="/menu.jsp" />
 
 	
-	<div class="container">
+		<div class = "container">
+			<h1 class = "display-3">회원 수정</h1>
+
 		<form name="newMember" action="updateMemberform.do" method="post"  
-		class="form-horizontal">
+		class="form-horizontal"
+		style="margin-bottm:0px; margin-top:25px;">
 			<div class="form-group row">				
 				<div class="col-sm-3">
 				<input type="hidden" name= "id" class="form-control" value="<%=(String)session.getAttribute("UserId") %>" />
@@ -76,29 +74,29 @@
 	
 			<div class="form-group row">
 				<label class="col-sm-2">주소</label>
-				<div class="col-sm-5">
+				<div class="col-sm-3">
 					<input type="text" name="address" class="form-control" placeholder="address"
 					value="<c:out value='${row.address}'/>">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">비밀번호 찾기</label>
-				<div class="col-sm-5">
-					<input type="text" name="pwfind" class="form-control" placeholder="비밀번호찾기 힌트를 입력하세요"
+				<div class="col-sm-3">
+					<input type="text" name="pwfind" class="form-control" placeholder="Password Hint"
 					value="<c:out value='${row.pwfind}'/>">
 				</div>
 			</div>
 		<div class="form-group row">
 				<label class="col-sm-2">휴대전화 번호</label>
-				<div class="col-sm-5">
-					<input type="text" name="phone" class="form-control" placeholder="휴대전화 번호"
+				<div class="col-sm-3">
+					<input type="text" name="phone" class="form-control" placeholder="Phone Number"
 					value="<c:out value='${row.phone}'/>">
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
-					<input type="button" class="btn btn-primary" value="회원수정" onclick="checkForm();">
-					<a href="deleteMemberform.do" class="btn btn-primary">회원탈퇴</a>
+					<input type="button" class="btn btn-primary" id="updatebtn" value="회원수정" onclick="checkForm();">
+					<a href="deleteMemberform.do" class="btn btn-primary" id="updatebtn" >회원탈퇴</a>
 				</div>
 			</div>		
 		</form>

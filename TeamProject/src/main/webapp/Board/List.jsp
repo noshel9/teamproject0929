@@ -6,6 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+<link rel="stylesheet" href="../css/List.css">
+
 <meta charset="UTF-8">
 <title>회원제 게시판</title>
 <script type="text/javascript">
@@ -32,24 +36,22 @@ String pageNum_chk_e = request.getAttribute("pageNum_chk_e").toString();
 int totalCount = Integer.parseInt(request.getAttribute("totalCount").toString());
 List<BoardDTO> boardLists = (List<BoardDTO>)request.getAttribute("boardLists");
 %>
-<jsp:include page="Boardmenu.jsp"></jsp:include>
-    <!-- 검색폼 --> 
-    <form method="get" name="optionform">  
-    <div style="padding: 1% 20%;">
-   		<div style="margin-bottom: 15px;">
-    		<div style="text-align: center;">
-          	  <select name="searchField" onchange="changeFunc();"> 
+<jsp:include page="/menu.jsp"></jsp:include>
+    <!-- 검색폼 -->
+    <div class="container" id="board_list">
+    <form method="get" name="optionform" >  
+          	  <select name="searchField" onchange="changeFunc();" id="search1"> 
                 <option value="title">제목</option> 
                 <option value="content">내용</option>
                 <option value="id" >작성자</option>
                 <option value="id2">내글보기</option>
            	 </select>
-            <input class="form-control form-control-sm" type="text" name="searchWord" style="width: 70%; display: inline;"  />            
-            <input type="submit" value="검색하기" /></div>
-    	</div>
+            <input class="form" type="text" name="searchWord" id="search2"/>            
+            <input type="submit" value="검색하기" id="search3"/>
+  
     </form>
     <!-- 게시물 목록 테이블(표) -->     
-    <table class="table table-striped">
+    <table class="table">
         <!-- 각 칼럼의 이름 --> 
         <tr align="center">
             <th>번호</th>
@@ -86,27 +88,23 @@ if (boardLists == null || boardLists.size() == 0) {
 	<%
 		    }
 		}
-	%>
-    </table>    
+	%>  
     <!--목록 하단의 [글쓰기] 버튼-->
-    <table class="table">
         <tr align="right">            
             <%
 				if(session.getAttribute("UserId") != null){
 				%>
-				<td>
-			<button type="button" class="btn btn-primary" onclick="location.href='Write.jsp';">글쓰기</button>
+				<td colspan="5" align="right">
+			<button type="button" id="write_btn" onclick="location.href='Write.jsp';">글쓰기</button>
 				</td>	
 			<%}%>           
         </tr>
-    </table>
-    </div>    
-    <form action="ListModel.li?List=List" name="pageLeftForm" method="post">
-    <div style="text-align: center; height: auto; width: 25%; margin: auto;">  
+    </table>  
+    <div>
+    <form action="ListModel.li?List=List" name="pageLeftForm" method="post" id="pageform">  
     <b><%=pageNum %>page</b><br/> 
-        <nav aria-label="Page navigation example">
-  <ul style="justify-content: center;" class="pagination">
-    <li class="page-item">    
+  <ul>
+    <li >    
     <!-- <a href="List.jsp?pageLeft=L"><<</a> -->
     <input type="hidden" name="hdnbt" />
     <input type="hidden" name="pageNum" value="<%=pageNum%>" />
@@ -115,7 +113,7 @@ if (boardLists == null || boardLists.size() == 0) {
 	<%
 	for(int i =Integer.parseInt(pageList_s); i<Integer.parseInt(pageList_e); i++){ // 페이지 리스트 버튼 출력		
 		%>		
-	<li class="page-item"><a class="page-link" href="ListModel.li?pageNum=<%=i%>"><%=i %></a></li>			
+	<li class="pagination"><a class="active" href="ListModel.li?pageNum=<%=i%>"><%=i %></a></li>			
 	<%
 	}	
 	%>	
@@ -124,8 +122,7 @@ if (boardLists == null || boardLists.size() == 0) {
       <input class="page-link"  type="submit" name="pageRight" value=">>">      
     </li>
   </ul>
-</nav>
+    </form>
     </div>
-    </form>    
 </body>
 </html>

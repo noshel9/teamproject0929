@@ -3,17 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel = "stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/resultMember.css">
 <title>회원 정보</title>
 </head>
 <body>
-<jsp:include page="Membermenu.jsp" />
-	<div class = "jumbotron" >
+<jsp:include page="/menu.jsp" />
+
 		<div class = "container">
 			<h1 class = "display-3">회원 정보</h1>
-		</div>
-	</div>	
+		</div>	
 	
 	<div class = "container" align="center">
 	<%

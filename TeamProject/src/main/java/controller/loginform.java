@@ -42,6 +42,7 @@ public class loginform extends HttpServlet {
 		if(request.getParameter("findid") != null) {
 			FindIdAction(request,response);
 		}
+
 		
 	}
 	
@@ -104,5 +105,6 @@ public class loginform extends HttpServlet {
 		request.getRequestDispatcher("PwfindMember.jsp").forward(request, response);
 	}
 	
+
 
 }

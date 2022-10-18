@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="../resource/css/Member.css">
+
+<link rel="stylesheet" href="../css/login3.css">
 	<%
 		List<MemberDTO> fw = (List<MemberDTO>)request.getAttribute("dto") ;
 
@@ -48,8 +48,8 @@
 <title>Login</title>
 </head>
 <body>
-	<jsp:include page="Membermenu.jsp" />
-	<div class="jumbotron">
+	<jsp:include page="/menu.jsp" />
+
 		<div class="container" align="center">
 			<h1 class="display-3">편케팅 로그인</h1>
 		</div>
@@ -70,40 +70,84 @@
 					out.println("<div class='alert alert-danger'>");
 					out.println("아이디와 비밀번호를 확인해 주세요");
 					out.println("</div>");
+					
 					}
 					
 				}if(request.getParameter("loginId") != null){
-					out.println(" <h2 class='alert alert-danger'>" + "아이디 혹은 비밀번호가 틀렸습니다.</h2>");
+					out.println(" <h2 class='alert'>" + "아이디 혹은 비밀번호가 틀렸습니다.</h2>");
+					
 				}
-				cnt++;
 				
+				cnt++;
 			%>
 			<%
 				String action="loginform.do?log=log";
 			%>
+			<form class="form-signin" action="<%=action %>" method="post">
+		<table> <!-- style="width: 360px;"> -->
 			
-			<form class="form-signin" action="<%= action %>" method="post">
-				<div class="form-group">
-					<label for="inputUserName" class="sr-only">User Name</label>
-					<input type="text" class="form-control" id="idlog" placeholder="ID" 
-					name='id' required autofocus>	
-				</div>
-				<div class="form-group">
-					<label for="inputPassword" class="sr-only">Password</label>
-					<input type="password" class="form-control" id="idlog" placeholder="Password" 
-					name='pass' required>
-				</div>
-				<button class="btn btn btn-lg btn-dark btn-block" id="log" type="submit">로그인</button>
-				
-			</form>
+
+        <tr>
+            <td id="logtext">User Name</td>
+            <td><input type="text" class="form-control" id="idlog" placeholder="ID" 
+					name='id' required autofocus></td>
+        </tr>
+        
+        <tr>
+            <td id="logtext">PassWord</td>
+            <td><input type="password" class="form-control" id="idlog" placeholder="Password" 
+					name='pass' required></td>
+        </tr>
+    	
+<!--     	 <table border="1"> -->
+            
+<!--             <tr> -->
+<!--                 <td>1 - 1</td> -->
+<!--                 <td>1 - 2</td> -->
+<!--                 <td>1 - 3</td> -->
+<!--             </tr> -->
+<!--             <tr> -->
+<!--                 <td>2 - 1</td> -->
+<!--                 <td>2 - 2</td> -->
+<!--                 <td>2 - 3</td> -->
+<!--             </tr> -->
+<!--             <tr> -->
+<!--                 <td>3 - 1</td> -->
+<!--                 <td>3 - 2</td> -->
+<!--                 <td>3 - 3</td> -->
+<!--             </tr> -->
+<!--             <tr> -->
+<!--                 <td>4 - 1</td> -->
+<!--                 <td>4 - 2</td> -->
+<!--                 <td>4 - 3</td> -->
+<!--             </tr> -->
+<!--         </table> -->
+
+    	 <table class="btn_set"><!--  border="1"> -->
+            <tr>
+                
+<!--                 <td rowspan="2" href="/Member/IdfindMember.jsp"> -->
+					<td rowspan="2" onclick="location.href='/TeamProject/Member/IdfindMember.jsp';">
+        			<button id="idfind" type="submit">아이디 찾기</button>
+                </td>
+            </tr>
+            <tr>
+<!--                 <td colspan="1" href="/Member/PwfindMember.jsp"> -->
+					<td colspan="1" onclick="location.href='/TeamProject/Member/PwfindMember.jsp';">
+        	<button id="pwfind" type="submit" style="width: 130px;">비밀번호 찾기</button>
+        		</td>
+            	 <td id="loginbtn" colspan="1">
+                <button class="login_btn" id="log" type="submit">로그인</button>
+        		</td>
+                
+            </tr>
+           
+        </table>
+    
+    	</form>
+    </table>
 		</div>
 	</div>
-	<div>
-		<ul class="find" style="list-style:none; display:inline; text-a">
-			<li><a href="PwfindMember.jsp" style="float:left; margin-left:20px; ">비밀번호 찾기</a></li>
-			<li><a href="IdfindMember.jsp"	style="float:left; margin-left:20px; ">아이디 찾기</a></li>
-			
-	</ul>
-	</div>
+	
 </body>
 </html>

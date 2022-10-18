@@ -17,7 +17,7 @@
 		form.submit();
 	}
 	</script>
-<jsp:include page="Boardmenu.jsp"></jsp:include>
+<jsp:include page="/menu.jsp"></jsp:include>
 <%
 	String num = request.getParameter("num");	
 	String action = "ListModel.li?write=write";

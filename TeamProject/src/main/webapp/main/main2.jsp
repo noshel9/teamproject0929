@@ -10,8 +10,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>오늘의 편케팅!</title>
 
-	<link rel="stylesheet" type="text/css" href="fullpage.css" />
-	<link rel="stylesheet" type="text/css" href="main2.css" />
+	<link rel="stylesheet" type="text/css" href="../css/fullpage.css" />
+	<link rel="stylesheet" type="text/css" href="../css/main2.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 	<style>
 
@@ -29,7 +29,6 @@
 <script type="text/javascript">
 	function chek() {		
 		var id =<%=id_chek%>;
-		console.log(id);
 		if(id == null){
 			alert("로그인 해주세요");
 			return false;
@@ -39,7 +38,7 @@
 		}
 	}
 </script>
-<body {top-margin:0; bottom-margin:0; left-margin:0; right-margin:0}>
+<body style="top-margin:0; bottom-margin:0; left-margin:0; right-margin:0;">
  <header>
         <div class="logo">
          <a onclick="location.href='main2.jsp'"><img src="../imgs/logo_small.png"/></a>

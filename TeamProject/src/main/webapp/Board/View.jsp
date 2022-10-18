@@ -43,7 +43,7 @@
 
 </head>
 <body>
-<jsp:include page="Boardmenu.jsp"></jsp:include>
+<jsp:include page="/menu.jsp"></jsp:include>
 <link rel = "stylesheet" href="../resource/css/NewFile.css">
 <form name="writeFrm" style="padding: 1% 20%;">
 	<input type="hidden" name="num" value="<%=num%>">		
