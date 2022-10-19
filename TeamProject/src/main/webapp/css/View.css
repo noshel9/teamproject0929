@@ -33,14 +33,17 @@ header{
 }
 
 .txt1{
+	font-family: "s-core-dream-bold", sans-serif !important;
 	width: 796px;
 	height: 100px;
 	border-radius: 5px;
 	background: none;
 	resize: none;
+	
 }
 
 .txt2{
+	font-family: "s-core-dream-bold", sans-serif !important;
 	width: 300px;
     height: 50px;
     border-top: none;

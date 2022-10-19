@@ -58,7 +58,7 @@
 			<td>번호</td>
 			<td><%=dto.getNum() %></td>
 			<td>작성자</td>
-			<td><%=dto.getName() %></td>			
+			<td><%=dto.getId() %></td>			
 		</tr>
 		<tr>
 			<td>작성일</td>

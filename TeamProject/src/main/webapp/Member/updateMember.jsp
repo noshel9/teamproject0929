@@ -34,13 +34,9 @@
 <title>회원 수정</title>
 </head>
 <body>
-
-	<jsp:include page="/menu.jsp" />
-
-	
+	<jsp:include page="/menu.jsp" />	
 		<div class = "container">
-			<h1 class = "display-3">회원 수정</h1>
-
+					<h1 class = "display-3">회원 수정</h1>
 		<form name="newMember" action="updateMemberform.do" method="post"  
 		class="form-horizontal"
 		style="margin-bottm:0px; margin-top:25px;">

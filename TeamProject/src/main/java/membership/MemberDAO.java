@@ -43,25 +43,25 @@ public class MemberDAO extends JDBConnect{
 		}
 		return dto;
 	}
-	public int getMemberID(String uid) {
-		int cnt =0;
+	public String getMemberName(String uid) {
+		//int cnt =0;
 		String query = "select * from member where id=? ";
-		String id;
+		String name = null;
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, uid);			
 			rs = psmt.executeQuery();	
 			
 			if(rs.next()) {
-				id = rs.getString("id");
-				cnt++;				
+				name = rs.getString("name");
+				//cnt++;				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("ȸ�� ��ȸ ����");
+			System.out.println("error");
 		}
 		
-		return cnt;
+		return name;
 	}
 
 //	
