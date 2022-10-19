@@ -10,6 +10,10 @@
 <%
 
 String a = request.getParameter("a");
+String addr = (String)request.getAttribute("addr");
+String phone = (String)request.getAttribute("phone");
+String name = (String)request.getAttribute("name");
+String pwfind = (String)request.getAttribute("pwfind");
 %>
 <script type="text/javascript">
 
@@ -24,6 +28,22 @@ String a = request.getParameter("a");
 		}
 		if (document.newMember.pass.value != document.newMember.pw_confirm.value) {
 			alert("비밀번호가 일치하지 않습니다.");
+			return;
+		}		
+		if (!document.newMember.name.value) {
+			alert("이름을 입력하세요.");
+			return;
+		}
+		if (!document.newMember.address.value) {
+			alert("주소를 입력하세요.");
+			return;
+		}		
+		if (!document.newMember.pwfind.value) {
+			alert("힌트를 입력하세요.");
+			return;
+		}
+		if (!document.newMember.phone.value) {
+			alert("전화번호를 입력하세요.");
 			return;
 		}
 		document.newMember.submit();
@@ -83,7 +103,7 @@ a = request.getParameter("a") == null ? "false" : request.getParameter("a");
 			<div class="form-group row">
 				<label class="col-sm-2">성명</label>
 				<div class="col-sm-3">
-					<input type="text" name="name" class="form-control" placeholder="name"
+					<input type="text" name="name" class="form-control" placeholder="<%=name %>"
 						value="<c:out value='${row.name}'/>" >
 				</div>
 			</div>
@@ -91,21 +111,21 @@ a = request.getParameter("a") == null ? "false" : request.getParameter("a");
 			<div class="form-group row">
 				<label class="col-sm-2">주소</label>
 				<div class="col-sm-3">
-					<input type="text" name="address" class="form-control" placeholder="address"
+					<input type="text" name="address" class="form-control" placeholder="<%=addr %>"
 					value="<c:out value='${row.address}'/>">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">비밀번호 찾기</label>
 				<div class="col-sm-3">
-					<input type="text" name="pwfind" class="form-control" placeholder="Password Hint"
+					<input type="text" name="pwfind" class="form-control" placeholder="<%=pwfind %>"
 					value="<c:out value='${row.pwfind}'/>">
 				</div>
 			</div>
 		<div class="form-group row">
 				<label class="col-sm-2">휴대전화 번호</label>
 				<div class="col-sm-3">
-					<input type="text" name="phone" class="form-control" placeholder="Phone Number"
+					<input type="text" name="phone" class="form-control" placeholder="<%=phone %>"
 					value="<c:out value='${row.phone}'/>">
 				</div>
 			</div>

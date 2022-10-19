@@ -57,11 +57,19 @@ public class updateMemberform extends HttpServlet {
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
 		String id_chk = (String)session.getAttribute("UserId");
-		String pass_chk = (String)session.getAttribute("UserPw");
+		//String pass_chk = (String)session.getAttribute("UserPw");
+		MemberDAO dao = new MemberDAO();
+		MemberDTO dto = dao.getMemberDTO(id, pass);		
 		
-		if(id.equals(id_chk) && pass.equals(pass_chk)) {
-			response.sendRedirect("/TeamProject/Member/updateMember.jsp?a=true");
-		}else {
+		if(dto.getPass() != null && id.equals(id_chk)) {
+			request.setAttribute("addr", dto.getAddress());
+			request.setAttribute("phone", dto.getPhone());
+			request.setAttribute("pwfind", dto.getPwfind());
+			request.setAttribute("name", dto.getName());			
+			/* response.sendRedirect("/TeamProject/Member/updateMember.jsp?a=true"); */
+			request.getRequestDispatcher("updateMember.jsp?a=true").forward(request, response);
+		}		
+		else {
 			response.sendRedirect("/TeamProject/Member/updateMember.jsp?a=false");
 		}
 		
