@@ -43,7 +43,7 @@ public class updateMemberform extends HttpServlet {
 		java.sql.Date sqlDate = new java.sql.Date(currentDatetime.getTime());
 		java.sql.Timestamp timestamp = new java.sql.Timestamp(currentDatetime.getTime()); 
 		
-		MemberDAO dao = new MemberDAO();
+		MemberDAO dao = new MemberDAO();		
 		MemberDTO memberDTO = dao.getupdateMemberDTO(id, pass, name, address, pwfind, phone);
 		
 		response.sendRedirect("/TeamProject/Member/resultMember.jsp?msg=0");

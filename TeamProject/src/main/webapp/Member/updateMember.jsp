@@ -104,7 +104,7 @@ a = request.getParameter("a") == null ? "false" : request.getParameter("a");
 				<label class="col-sm-2">성명</label>
 				<div class="col-sm-3">
 					<input type="text" name="name" class="form-control" placeholder="<%=name %>"
-						value="<c:out value='${row.name}'/>" >
+						value="<c:out value='<%=name %>'/>" >
 				</div>
 			</div>
 	
@@ -112,21 +112,21 @@ a = request.getParameter("a") == null ? "false" : request.getParameter("a");
 				<label class="col-sm-2">주소</label>
 				<div class="col-sm-3">
 					<input type="text" name="address" class="form-control" placeholder="<%=addr %>"
-					value="<c:out value='${row.address}'/>">
+					value="<c:out value='<%=addr %>'/>">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">비밀번호 찾기</label>
 				<div class="col-sm-3">
 					<input type="text" name="pwfind" class="form-control" placeholder="<%=pwfind %>"
-					value="<c:out value='${row.pwfind}'/>">
+					value="<c:out value='<%=pwfind %>'/>">
 				</div>
 			</div>
 		<div class="form-group row">
 				<label class="col-sm-2">휴대전화 번호</label>
 				<div class="col-sm-3">
 					<input type="text" name="phone" class="form-control" placeholder="<%=phone %>"
-					value="<c:out value='${row.phone}'/>">
+					value="<c:out value='<%=phone %>'/>">
 				</div>
 			</div>
 			<div class="form-group row">
