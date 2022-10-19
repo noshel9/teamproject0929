@@ -6,10 +6,10 @@
     margin: 0;
 }
 
-body{
-   background: linear-gradient(#f2b2b2, #c8ccf2);
+html{
+	   background: linear-gradient(#f2b2b2, #c8ccf2);
    background-size: cover;
-   height: 70.3vh;
+   height: 100vh;
 }
 
 header{

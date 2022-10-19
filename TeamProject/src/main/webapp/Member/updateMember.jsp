@@ -6,6 +6,11 @@
 <head>
 <link rel="stylesheet" type="text/css" href="../dist/fullpage.css" />
 <link rel="stylesheet" type="text/css" href="../css/updateMember.css" />
+
+<%
+
+String a = request.getParameter("a");
+%>
 <script type="text/javascript">
 
 	function checkForm() {
@@ -23,8 +28,20 @@
 		}
 		document.newMember.submit();
 	}
+	
+	function chkUpdate() {
+		document.newMember.action = "updateMemberform.do?chkupdate=chkupdate";
+		document.newMember.submit();				
+	}	
+	setTimeout(function() {
+		if('<%=a%>' == 'false'){		
+			alert('아이디나 비밀번호가 틀렸습니다.');
+		}
+	}, 200)
 </script>
-<% String UserId = (String) session.getAttribute("UserId"); %>
+<% String UserId = (String) session.getAttribute("UserId"); 
+a = request.getParameter("a") == null ? "false" : request.getParameter("a");
+%>
 <sql:setDataSource var="dataSource" url="jdbc:mysql://localhost:3306/marketnavi"
 	driver="com.mysql.jdbc.Driver" user="root" password="1234" />
 <sql:query dataSource="${dataSource}" var="resultSet" >
@@ -36,8 +53,11 @@
 <body>
 	<jsp:include page="/menu.jsp" />	
 		<div class = "container">
+		<%		
+			if(a.equals("true")){ 
+			%>
 					<h1 class = "display-3">회원 수정</h1>
-		<form name="newMember" action="updateMemberform.do" method="post"  
+		<form name="newMember" action="updateMemberform.do?update=update" method="post"  
 		class="form-horizontal"
 		style="margin-bottm:0px; margin-top:25px;">
 			<div class="form-group row">				
@@ -96,8 +116,34 @@
 				</div>
 			</div>		
 		</form>
+		<%}else if(a.equals("false")){ %>
+							<h1 class = "display-3">회원 확인</h1>
+		<form name="newMember" action="updateMemberform.do" method="post"  
+		class="form-horizontal"
+		style="margin-bottm:0px; margin-top:25px;">
+			<div class="form-group row">
+			<label class="col-sm-2">아이디</label>				
+				<div class="col-sm-3">
+				<input type="text" name="id" class="form-control" placeholder="id"
+						value="<c:out value='${row.id}'/>" >
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2">비밀번호</label>
+				<div class="col-sm-3">
+					<input type="password" name="pass" class="form-control" placeholder="password"
+						value="<c:out value='${row.pass}'/>" >
+				</div>
+			</div>		
+			<div class="form-group row">
+				<div class="col-sm-offset-2 col-sm-10">
+					<input type="button" class="btn btn-primary" id="updatebtn" value="회원 확인" onclick="chkUpdate();">
+					<!-- <a href="deleteMemberform.do" class="btn btn-primary" id="updatebtn" >회원탈퇴</a> -->
+				</div>
+			</div>		
+		</form>
+		<%} %>
 	</div>
-
 </body>
 </html>
 

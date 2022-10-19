@@ -62,7 +62,7 @@ public class loginform extends HttpServlet {
 		MemberDTO memberDTO = dao.getMemberDTO(id, pass);
 		
 		session.setAttribute("UserId", memberDTO.getId());
-		
+		session.setAttribute("UserPw", memberDTO.getPass());
 		
 		response.sendRedirect("/TeamProject/Member/resultMember.jsp?msg=2");
 		

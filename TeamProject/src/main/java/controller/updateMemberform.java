@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import membership.MemberDAO;
 import membership.MemberDTO;
@@ -19,14 +20,17 @@ public class updateMemberform extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		updateMemberAction(request, response);
+		request.setCharacterEncoding("utf-8");
+		if(request.getParameter("update")!= null) {
+			updateMemberAction(request, response);	
+		}		
+		if(request.getParameter("chkupdate")!= null) {
+			chkUpdateMember(request, response);
+		}
 	}
 	
 	public void updateMemberAction(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
-		request.setCharacterEncoding("utf-8");
+			throws ServletException, IOException {	
 		
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
@@ -45,6 +49,23 @@ public class updateMemberform extends HttpServlet {
 		response.sendRedirect("/TeamProject/Member/resultMember.jsp?msg=0");
 		
 		//request.getRequestDispatcher("/member/updatgeMember.jsp").forward(request, response);
+	}
+	
+	public void chkUpdateMember(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String id = request.getParameter("id");
+		String pass = request.getParameter("pass");
+		String id_chk = (String)session.getAttribute("UserId");
+		String pass_chk = (String)session.getAttribute("UserPw");
+		
+		if(id.equals(id_chk) && pass.equals(pass_chk)) {
+			response.sendRedirect("/TeamProject/Member/updateMember.jsp?a=true");
+		}else {
+			response.sendRedirect("/TeamProject/Member/updateMember.jsp?a=false");
+		}
+		
+		
 	}
 		
 }

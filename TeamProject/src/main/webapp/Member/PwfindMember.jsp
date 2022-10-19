@@ -71,7 +71,7 @@
 			
 			<form class="form-find" name="find_pw" action="<%=findpw %>" method="post">
 				<div class="form-group">
-					<label for="inputUserName" class="findtext">사용자  닉네임</label>
+					<label for="inputUserName" class="findtext">사용자  아이디</label>
 					<input type="text" class="form-control" id="idlog" placeholder="ID" name="id" > 
 				</div>
 				<div class="form-group">
