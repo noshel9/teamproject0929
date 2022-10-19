@@ -79,26 +79,27 @@ dao.close();  // DB 연결 닫기 */
 </head>
 <body>
     <!-- 검색폼 --> 
+    <div class="search_form">
     <form method="get" name="optionform">  
-    <div style="padding: 1% 20%;">
-   		<div style="margin-bottom: 15px;">
-    		<div style="text-align: center;">
-          	  <select name="searchField" onchange="changeFunc();"> 
+   		<div>
+    		<div>
+          	  <select name="searchField" onchange="changeFunc();" id="search1"> 
                 <option value="title" >제목</option> 
                 <option value="content">내용</option>
                 <option value="id" >작성자</option>
                 <option value="id2">내글보기</option>
            	 </select>
            	 <input type="hidden" name="num" value="<%=num%>">
-            <input class="form-control form-control-sm" type="text" name="searchWord" style="width: 70%; display: inline;"  />            
-            <input type="submit" value="검색하기" /></div>
+            <input class="form-control form-control-sm" type="text" name="searchWord" id="search2"/>            
+            <input type="submit" value="검색하기" id="search3" /></div>
     	</div>
     </form>
+    </div>
     <!-- 게시물 목록 테이블(표) --> 
     
-    <table class="table table-striped">
+    <table class="li_table">
         <!-- 각 칼럼의 이름 --> 
-        <tr align="center">
+        <tr align="center" style="height:50px;">
             <th>번호</th>
             <th>제목</th>
             <th>작성자</th>
@@ -134,7 +135,7 @@ else {
     {
         //virtualNum = totalCount--;  // 전체 게시물 수에서 시작해 1씩 감소    
 %>
-        <tr align="center">
+        <tr align="center" style="height:35px;" >
             <td><%= totalCount-i%></td>  <!--게시물 번호-->
             <td align="left">  <!--제목(+ 하이퍼링크)-->
                 <a href="View.jsp?num=<%= boardLists.get(i).getNum() %>" style="color: black;"><%= boardLists.get(i).getTitle() %></a> 
@@ -150,14 +151,14 @@ else {
     </table>
     
     <!--목록 하단의 [글쓰기] 버튼-->
-    <table class="table">
-        <tr align="right">
+    <table id="com_t">
+        <tr>
             
             <%
 				if(session.getAttribute("UserId") != null){
 				%>
-				<td>
-			<button type="button" class="btn btn-primary" onclick="location.href='Write.jsp';">글쓰기</button>
+				<td style="border: none;">
+			<button type="button" class="com_btn" onclick="location.href='Write.jsp';">글쓰기</button>
 				</td>	
 				<%} %>            
             
@@ -165,17 +166,20 @@ else {
     </table>
     </div>
     
+    <div id="page">
     <form action="ListModel.li" name="pageLeftForm" method="post">
-    <div style="text-align: center; height: auto; width: 25%; margin: auto;">  
-    <b><%=pageNum %>page</b><br/> 
-        <nav aria-label="Page navigation example">
-  <ul style="justify-content: center;" class="pagination">
-    <li class="page-item">    
+    <%-- <b><%=pageNum %>page</b> --%><br/>
+    <div class="wrap">    
+        <!-- <div aria-label="Page navigation example" class="nav_not"> -->
+        
+  <ul class="pagination">
+  
+  <!-- <div class="wrap">  -->  
+    <li>    
     <!-- <a href="List.jsp?pageLeft=L"><<</a> -->
     <input type="hidden" name="hdnbt" />
     <input type="hidden" name="pageNum" value="<%=pageNum%>" />
-      <input type="button" name="pageLeft" class="page-link" aria-label="Previous" value="<<" onclick="{document.pageLeftForm.hdnbt.value=this.value;document.pageLeftForm.submit();}">        
-      </a>
+      <input type="button" name="pageLeft" class="page-link" aria-label="Previous" value="<<" onclick="{document.pageLeftForm.hdnbt.value=this.value;document.pageLeftForm.submit();}">    
     </li>
     <%-- <input type="button" name="pageLeft" value="<<" onclick="{document.pageLeftForm.hdnbt.value=this.value;document.pageLeftForm.submit();}" > --%>
 	<%
@@ -247,21 +251,41 @@ else {
 	for(int i =pageList_s; i<pageList_e; i++){	
 		
 		%>		
-	<li class="page-item"><a class="page-link" href="ListModel.li?pageNum=<%=i %>"><%=i %></a></li>			
+	<li class="pagination box"><a class="active" onmouseover="active_over(<%=i%>);" onmouseout="active_out(<%=i%>);" href="ListModel.li?pageNum=<%=i %>"><%=i %></a></li>			
 	<%
 	}
 	/* System.out.println(pageLeft + ":" + pageRight+":" + pageNum); */
 	%>
 	<!-- <a href="List.jsp?pageRight=R">>></a> -->	
 	<input type="hidden" name="i" value="<%=pageList_e%>">	
-	<li class="page-item">
-      <!-- <a href="#" aria-label="Next"> -->
-      <input class="page-link"  type="submit" name="pageRight" value=">>">        
-      </a>
+<li class="page-item">      
+      <input class="page-link"  type="submit" name="pageRight" value=">>">      
+    
     </li>
+    </li>
+    
   </ul>
-</nav>
     </div>
     </form> 
+    </div>
 </body>
+<script type="text/javascript">
+
+function active_over(num) {	
+	if(num!=<%=pageNum%>){
+		document.querySelectorAll('.active')[num-1].style.backgroundColor = 'white';
+		document.querySelectorAll('.active')[num-1].style.color = 'tomato';
+	}
+}
+function active_out(num) {
+	if(num!=<%=pageNum%>){
+		document.querySelectorAll('.active')[num-1].style.backgroundColor ='tomato'; 
+		document.querySelectorAll('.active')[num-1].style.color = 'white';
+	}
+}
+
+document.querySelectorAll('.active')[<%=pageNum%>-1].style.backgroundColor = 'white';
+document.querySelectorAll('.active')[<%=pageNum%>-1].style.color = 'tomato';
+
+</script> 
 </html>

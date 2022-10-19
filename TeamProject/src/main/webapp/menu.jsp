@@ -28,7 +28,10 @@
 <header>
 	<nav>
 		<div class = "top-bar">
-				<a class = "logo"  href="../main/main2.jsp"><img src="../imgs/logo_small.png"/></a>
+						
+				<a class = "logo" href='<c:url value="/main/main2.jsp" />'><img src='<c:url value="/imgs/logo_small.png"/>'></a>
+				
+
 				
 				<ul class = "menu">
 				<c:choose>

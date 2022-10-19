@@ -5,60 +5,129 @@
 html{
    background: linear-gradient(#f2b2b2, #c8ccf2);
    background-size: cover;
-   /* height: 100vh; */
+/*    height: 118.4vh; */
 }
 
 header{
-	height: 129px;
-	border: none;
-	width:100%;
-	top: 0;
-    left: 0;
-	position: fixed;
-}
-
-.container{
-	margin-top:240px;
-	/* margin-left: 610px; */
-}
-
-#search1{
-	height: 36px;
-    border-radius: 5px;
-    font-size: 15px;
-    text-align: center;
-    font-family: "s-core-dream-bold", sans-serif !important;
-}
-
-#search2{
-	height: 30px;
-    border-radius: 5px;
-    font-size: 15px;
-    text-align: center;
-    font-family: "s-core-dream-bold", sans-serif !important;
-}
-
-#search3{
-	height: 36px;
-    border-radius: 5px;
-    font-size: 15px;
-    text-align: center;
-    font-family: "s-core-dream-bold", sans-serif !important;
-    background-color: white;
-    cursor: pointer;
-}
-
-#write_btn{
-	height: 30px;
-    border-radius: 5px;
-    font-size: 15px;
-    text-align: center;
-    font-family: "s-core-dream-bold", sans-serif !important;
-    background-color: white;
+    height: 129px;
+    background-color: none;
     border: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.view_form{
+	display:flex;
+	justify-content: center;
+	margin-top:130px;
+}
+
+.view_table{
+	border: 3px solid white;
+	width: 800px;
+    font-size: 19px;
+    border-radius: 5px;
+    border-collapse: collapse;
+}
+
+.txt1{
+	width: 796px;
+	height: 100px;
+	border-radius: 5px;
+	background: none;
+	resize: none;
+}
+
+.txt2{
+	width: 300px;
+    height: 50px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom : 3px solid black;
+	background: none;
+	resize: none;
+}
+
+.c_write{
+	margin-top: 10px;
+	text-align: center;
+}
+
+.c_table{
+	border: 3px solid white;
+	margin: auto;
+	width: 796px;
+	border-collapse: collapse;
+}
+
+tr{
+	font-family: "s-core-dream-bold", sans-serif !important;
+	margin-bottom : 5px;
+}
+
+th,td {
+    border: 2px solid white;
+  }
+  
+.sm{
+	height: 36px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-family: "s-core-dream-bold", sans-serif !important;
+    background-color: white;
+    cursor: pointer;
+}
+  
+.comt{
+	height: 36px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-family: "s-core-dream-bold", sans-serif !important;
+    background-color: white;
     cursor: pointer;
 }
 
+.del{
+	font-size:15px;
+	font-family: "s-core-dream-bold", sans-serif !important;
+	text-decoration: none;
+	color: red;
+}
+
+.selectReply{
+	font-size:15px;
+	font-family: "s-core-dream-bold", sans-serif !important;
+}
+
+.cmt_btn{
+	float: right;
+    margin-right: 5%;
+    margin-top: 1%;
+    height: 36px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-family: "s-core-dream-bold", sans-serif !important;
+    background-color: white;
+    cursor: pointer;
+}
+
+li{
+	float: left;
+	margin: 5px;
+}
+#reply{
+	font-family: "s-core-dream-regular", sans-serif !important;
+}
+
+.pagination {
+  display: inline-block;
+}
 .page-link{
 	height: 40px;
 	width: 40px;
@@ -70,47 +139,6 @@ header{
     border: none;
     cursor: pointer;
 }
-
-b{
-	/* margin-left : 310px; */
-	color: white;
-	font-size:18px;
-}
-
-.form{
-	width: 500px;
-}
-
-tr{
-	color:white;
-	font-family: "s-core-dream-bold", sans-serif !important;
-	margin-bottom : 5px;
-	padding:9px;
-}
-
-table{
-	width: 676px;
-    margin-top: 15px;
-    font-size: 19px;
-    border-radius: 5px;
-}
-
-table, tr{
-	 border: 2px solid white;
-}
-ul{
-	margin-left: 120px;
-}
-
-li{
-	float: left;
-	margin: 5px;
-}
-
-.pagination {
-  display: inline-block;
-}
-
 .pagination a {
   color: black;
   float: left;
@@ -120,19 +148,17 @@ li{
 }
 
 .pagination a.active {
+  font-family: "s-core-dream-bold", sans-serif !important;
   background-color: tomato;
   color: white;
 }
 
 .pagination a:hover:not(.active) {background-color: white;}
 
-#pageform{
-	margin-top:10px;
-}
-
 .wrap{
 	display: flex;
     justify-content: center;
+    margin-bottom: 50px;
 }
 .box{
 	text-align: center;

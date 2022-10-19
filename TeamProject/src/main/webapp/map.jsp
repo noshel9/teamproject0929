@@ -7,6 +7,7 @@
 <meta charset="UTF-8" http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <link rel = "stylesheet" href="resource/css/NewFile.css">
+<link rel="stylesheet" type="text/css" href="css/map.css" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -31,8 +32,7 @@
 <p><em>지도를 클릭해주세요!</em></p> 
 <div id="clickLatlng"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c4aacc8d54e6eb52e719965ff48e1393&libraries=services,clusterer"></script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=def47418c26c1b2e8383afc08b8370c5&libraries=services,clusterer"></script>
 <script>
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
@@ -57,7 +57,7 @@ var clusterer = new kakao.maps.MarkerClusterer({
 });
 
 <%
-String space = "\"\"";
+String space = "''";
 String keyword_ = "\""+request.getParameter("keyword")+"\"";
 System.out.println(keyword_);
 %>
@@ -65,9 +65,9 @@ var keyword = <%=request.getParameter("keyword")==null ? space : keyword_%>;
 console.log(keyword);
 //HTML5의 geolocation으로 사용할 수 있는지 확인합니다
 if (navigator.geolocation && keyword == '') { 
- // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	// GeoLocation을 이용해서 접속 위치를 얻어옵니다 
  navigator.geolocation.getCurrentPosition(function(position) {
-     
+ 	console.log('지오로케이션');    
      var lat = position.coords.latitude, // 위도
          lon = position.coords.longitude; // 경도
      
@@ -78,7 +78,7 @@ if (navigator.geolocation && keyword == '') {
      displayMarker(locPosition, message);         
    }); 
 }else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
- 
+	console.log('지오로케이션 실패');    
 /*  var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
      message = 'geolocation을 사용할수 없어요, 키워드를 입력해주세요'
      
