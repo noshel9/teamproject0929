@@ -31,7 +31,7 @@ header{
     top: 0;
     left: 0;
 }
-nav { width: 80%; position: absolute; top: 50px; right: 30px; }
+nav { width: 80%; position: absolute; top: 16px; right: 8px; }
 .menu{float: right;}
 .menu li{float: left;
 }

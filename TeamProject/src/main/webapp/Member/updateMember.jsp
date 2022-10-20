@@ -142,7 +142,7 @@ a = request.getParameter("a") == null ? "false" : request.getParameter("a");
 		class="form-horizontal"
 		style="margin-bottm:0px; margin-top:25px;">
 			<div class="form-group row">
-			<label class="col-sm-2">아이디</label>				
+			<label class="col-sm-2">아이디</label>			<!-- sd -->	
 				<div class="col-sm-3">
 				<input type="text" name="id" class="form-control" placeholder="id"
 						value="<c:out value='${row.id}'/>" >
