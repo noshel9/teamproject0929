@@ -106,9 +106,11 @@ table{
     height: 31em;
 }
 
-/* table, tr{ */
-/* 	 border: 2px solid white; */
-/* } */
+tr{
+	color: #404040;
+	text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
+}
+
 ul{
 	margin-left: 120px;
 }
@@ -144,7 +146,6 @@ li{
 
 a{
 	text-decoration: none;
-	text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
 	color: #404040;
 }
 

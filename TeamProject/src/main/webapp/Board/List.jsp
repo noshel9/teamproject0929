@@ -85,10 +85,10 @@ if (boardLists == null || boardLists.size() == 0) {
     
    	 for(int i =Integer.parseInt(pageNum_chk_s); i<Integer.parseInt(pageNum_chk_e);i++){          
 	%>
-      <tr align="center">
+      <tr align="center" >
           <td><%= totalCount-i%></td>  <!--게시물 번호-->
           <td align="left">  <!--제목(+ 하이퍼링크)-->
-              <a href="View.jsp?num=<%= boardLists.get(i).getNum() %>&&pageNum=<%=pageNum %>" style="color: black;"><%= boardLists.get(i).getTitle() %></a> 
+              <a href="View.jsp?num=<%= boardLists.get(i).getNum() %>&&pageNum=<%=pageNum %>"><%= boardLists.get(i).getTitle() %></a> 
           </td>
           <td align="center"><%= boardLists.get(i).getId() %></td>          <!--작성자 아이디-->
           <td align="center"><%= boardLists.get(i).getVisitcount() %></td>  <!--조회수-->

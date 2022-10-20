@@ -102,7 +102,7 @@
 
 <%for(int i=0; i<list.size(); i++){ %> 	
 		<tr>
-			<td class="selectReply" style="border: 1px solid rgba(255,255,255,0.3);"><%=list.get(i).getId() %></td>
+			<td class="selectReply" style="border: 1px solid rgba(255,255,255,0.3); text-align: center; "><%=list.get(i).getId() %></td>
 			<td class="selectReply" colspan="3" style="border: 1px solid rgba(255,255,255,0.3);"><%=list.get(i).getContent().replaceAll("\r\n", "<br/>")%>
 				<%				
 				for(int j=0; j<ReplyList.size(); j++){	
@@ -130,7 +130,7 @@
 				<a class="cursor" onclick="replyClose(event);">[닫기]</a>
 			</td>	
 			<%if(session.getAttribute("UserId").toString().equals(list.get(i).getId())){ %>
-			<td style="border: 1px solid rgba(255,255,255,0.3);"><a class="del" href="ListModel.li?deletePK=<%=list.get(i).getDeletePK()%>&&num=<%=num%>">삭제</a></td>	
+			<td style="border: 1px solid rgba(255,255,255,0.3); text-align: center;"><a class="del" href="ListModel.li?deletePK=<%=list.get(i).getDeletePK()%>&&num=<%=num%>">삭제</a></td>	
 		<%} %>
 		</tr>
 <%} %></table></div></div>

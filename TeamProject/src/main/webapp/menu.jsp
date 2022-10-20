@@ -31,7 +31,7 @@
 <body >
 <header>
 	<nav>
-		<div class = "top-bar">
+
 						
 				<a class = "logo" href='<c:url value="/main/main2.jsp" />'><img src='<c:url value="/imgs/logo_small.png"/>'></a>
 				
@@ -54,8 +54,7 @@
 						<!-- 절대 경로로 하이퍼링크 설정 -->
 					</c:otherwise>
 					</c:choose>
-				</ul>
-		</div>			
+				</ul>		
 	</nav>
 			
 </header>

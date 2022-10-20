@@ -84,6 +84,9 @@
 
 a{
 	text-decoration: none;
+}
+
+td, th{
 	color: #404040;
 	text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
 }
