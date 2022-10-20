@@ -20,7 +20,7 @@ header{
 
 #Title{
    font-family: "s-core-dream-bold", sans-serif !important;
-   width: 515px;
+   width: 100%;
    height: 40px;
    font-size: 15px;
    border-radius:10px;
@@ -32,9 +32,9 @@ header{
 
 #Contents{
 	font-family: "s-core-dream-bold", sans-serif !important;
-	width: 500px;
+	width: 100%;
 	height : 400px;
-	padding: 10px;
+	/* padding: 10px; */
 	margin-bottom:10px;
 	border-radius:10px;
 	background: none;
@@ -44,7 +44,7 @@ header{
 
 .InputBox{
 	padding: 1% 20%; 
-	margin-top: 15%;
+	margin-top: 20%;
 	flex: 0 1 auto;
 }
 
@@ -57,6 +57,7 @@ header{
 	
 }
 .write_form{
+	
 	display: flex;
     justify-content: center;
     font-family: "s-core-dream-bold", sans-serif !important;
@@ -79,5 +80,9 @@ header{
     color: #404040;
 }
 #wtform{
-	margin-top: 100px;
+	/* margin-top: 100px; */
+	width: 50%;
+}
+.form-group1{
+	width: 100%;
 }

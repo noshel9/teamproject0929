@@ -27,7 +27,7 @@
 	<form method="post" name = "WritePform" id="wtform" action="<%=action%>">
 	<div class= "InputBox">
 	<div class ="form-group1">
-		<label>제목</label>
+		<!-- <label>제목</label> -->
 		
              <input type ="text" id="Title" placeholder="제목을 입력하세요." name ="title" maxlength='20'>
          </div>

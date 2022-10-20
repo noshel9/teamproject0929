@@ -18,7 +18,7 @@ header{
 }
 
 .container{
-	margin-top:240px;
+	margin-top:200px;
 	/* margin-left: 610px; */
 }
 
@@ -28,6 +28,8 @@ header{
     font-size: 15px;
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
+    background-color: ivory;
+    color: #404040;
 }
 
 #search2{
@@ -36,6 +38,8 @@ header{
     font-size: 15px;
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
+    background-color: ivory;
+    color: #404040;
 }
 
 #search3{
@@ -44,19 +48,24 @@ header{
     font-size: 15px;
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
-    background-color: white;
+    background-color: ivory;
     cursor: pointer;
+    color: #404040;
 }
 
 #write_btn{
-	height: 30px;
+	height: 35px;
+	width: 66px;
     border-radius: 5px;
     font-size: 15px;
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
-    background-color: white;
+    background-color: ivory;
     border: none;
     cursor: pointer;
+    margin-top: 10px;
+    border: 2px solid black;
+    color: #404040;
 }
 
 .page-link{
@@ -66,7 +75,7 @@ header{
     font-size: 15px;
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
-    background-color: white;
+    background-color: ivory;
     border: none;
     cursor: pointer;
 }
@@ -82,22 +91,24 @@ b{
 }
 
 tr{
-	color:white;
+	color: ivory;
 	font-family: "s-core-dream-bold", sans-serif !important;
 	margin-bottom : 5px;
 	padding:9px;
 }
 
 table{
-	width: 676px;
+	width: 51em;
     margin-top: 15px;
     font-size: 19px;
-    border-radius: 5px;
+    border: 0;
+    margin-left: 24%;
+    height: 31em;
 }
 
-table, tr{
-	 border: 2px solid white;
-}
+/* table, tr{ */
+/* 	 border: 2px solid white; */
+/* } */
 ul{
 	margin-left: 120px;
 }
@@ -112,7 +123,7 @@ li{
 }
 
 .pagination a {
-  color: black;
+  color: #404040;
   float: left;
   padding: 8px 16px;
   text-decoration: none;
@@ -131,10 +142,20 @@ li{
 	margin-top:10px;
 }
 
-.wrap{
-	display: flex;
-    justify-content: center;
+a{
+	text-decoration: none;
+	text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
+	color: #404040;
 }
-.box{
-	text-align: center;
+
+thead{
+  background-color: rgba(255,255,255,0.3);
+}
+
+.wrap{
+	margin-left:39%;
+}
+
+#search_form{
+	margin-left: 31%;
 }
