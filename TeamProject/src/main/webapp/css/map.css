@@ -38,11 +38,12 @@ ul{
     font-family: 'Black Han Sans', sans-serif;
 }
 .menu a{
-        color: black;
+	 	color:#404040;
         padding: 0px 15px;
         display: block;
         font-size: 35px;
         clear:both;
+        text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
 }
 nav{
     height: 150px;

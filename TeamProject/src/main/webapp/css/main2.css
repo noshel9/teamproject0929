@@ -31,7 +31,7 @@ header{
     top: 0;
     left: 0;
 }
-nav { width: 80%; position: absolute; top: 50px; right: 30px; }
+nav { width: 80%; position: absolute; top: 16px; right: 8px; }
 .menu{float: right;}
 .menu li{float: left;
 }
@@ -80,9 +80,39 @@ h1{
 
 #section2{
 	background: linear-gradient(#b2b3d5, #c3b1e0);
-    font-size: 5em;
+/*     font-size: 5em; */
     
 }
 .logo{
 	cursor:pointer;
+}
+
+.intro{
+	display: flex;
+	justify-content: center;
+}
+
+.intro>li{
+	margin-left: 50px;
+    margin-top: 30px;
+}
+
+h6{
+	font-size: 2em;
+    font-weight: 100;
+/*     text-align: left; */
+    line-height: 2em;
+    font-family: 's-core-dream-bold', sans-serif;
+    color: #404040;
+    text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
+}
+
+.member_title{
+	font-size: 5em;
+	color: #404040;
+    text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+
+img{
+	width:10em;
 }
