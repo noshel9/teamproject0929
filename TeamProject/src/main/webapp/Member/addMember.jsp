@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="../css/addMember.css" />
 <script type="text/javascript">
 	function checkForm() {
-		if(!document.newMember.id.value) {
+		if(!document.newMember.id.value) { /* asdf */
 			alert("아이디를 입력하세요.");
 			return;
 		}
