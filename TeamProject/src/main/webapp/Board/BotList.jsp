@@ -99,6 +99,7 @@ dao.close();  // DB 연결 닫기 */
     
     <table class="li_table">
         <!-- 각 칼럼의 이름 --> 
+        <thead>
         <tr align="center" style="height:50px;">
             <th>번호</th>
             <th>제목</th>
@@ -106,6 +107,7 @@ dao.close();  // DB 연결 닫기 */
             <th>조회수</th>
             <th>작성일</th>
         </tr>
+        </thead>
         <!-- 목록의 내용 --> 
 <%
 if (boardLists.isEmpty()) {

@@ -25,16 +25,18 @@ header{
 }
 
 .view_table{
-	border: 3px solid white;
-	width: 800px;
+    width: 49em;
     font-size: 19px;
-    border-radius: 5px;
     border-collapse: collapse;
+    border-radius: 3px;
+    border-style: hidden;
+    box-shadow: 0 0 0 2px rgb(255 255 255 / 30%);
+    height: 16em;
 }
 
 .txt1{
 	font-family: "s-core-dream-bold", sans-serif !important;
-	width: 796px;
+	width: 70em;
 	height: 100px;
 	border-radius: 5px;
 	background: none;
@@ -44,7 +46,7 @@ header{
 
 .txt2{
 	font-family: "s-core-dream-bold", sans-serif !important;
-	width: 300px;
+	width: 40em;
     height: 50px;
     border-top: none;
     border-left: none;
@@ -60,10 +62,13 @@ header{
 }
 
 .c_table{
-	border: 3px solid white;
 	margin: auto;
-	width: 796px;
-	border-collapse: collapse;
+	width: 59em;
+	border-radius: 5px;
+  	box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
+  	border-collapse: collapse;
+
+	
 }
 
 tr{
@@ -71,9 +76,9 @@ tr{
 	margin-bottom : 5px;
 }
 
-th,td {
-    border: 2px solid white;
-  }
+/* th,td { */
+/*     border: 2px solid white; */
+/*   } */
   
 .sm{
 	height: 36px;
@@ -81,8 +86,10 @@ th,td {
     font-size: 15px;
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
-    background-color: white;
+    background-color: ivory;
     cursor: pointer;
+    margin-top: 10px;
+    color: #404040;
 }
   
 .comt{
@@ -91,8 +98,9 @@ th,td {
     font-size: 15px;
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
-    background-color: white;
+    background-color: ivory;
     cursor: pointer;
+    color: #404040;
 }
 
 .del{
@@ -118,6 +126,7 @@ th,td {
     font-family: "s-core-dream-bold", sans-serif !important;
     background-color: white;
     cursor: pointer;
+    color: #404040;
 }
 
 li{
@@ -138,12 +147,12 @@ li{
     font-size: 15px;
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
-    background-color: white;
+    background-color: ivory;
     border: none;
     cursor: pointer;
 }
 .pagination a {
-  color: black;
+  color: #404040;
   float: left;
   padding: 8px 16px;
   text-decoration: none;

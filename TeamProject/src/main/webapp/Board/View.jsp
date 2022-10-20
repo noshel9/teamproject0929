@@ -53,29 +53,29 @@
 <div class="view_form">
 <form name="writeFrm">
 	<input type="hidden" name="num" value="<%=num%>">		
-			<table class="view_table">
-		<tr style="height:35px;">
-			<td>번호</td>
+			<table class="view_table" border="0";>
+		<tr style="height:35px; border: 2px solid rgba(255,255,255,0.3);">
+			<td style="border: 2px solid rgba(255,255,255,0.3);">번호</td>
 			<td><%=dto.getNum() %></td>
-			<td>작성자</td>
+			<td style="border: 2px solid rgba(255,255,255,0.3);">작성자</td>
 			<td><%=dto.getId() %></td>			
 		</tr>
-		<tr>
-			<td>작성일</td>
+		<tr style="border: 2px solid rgba(255,255,255,0.3);">
+			<td style="border: 2px solid rgba(255,255,255,0.3);">작성일</td>
 			<td><%=dto.getPostdate()%></td>
-			<td>조회수</td>
+			<td style="border: 2px solid rgba(255,255,255,0.3);">조회수</td>
 			<td><%=dto.getVisitcount()%></td>		
 		</tr>
-		<tr>
-			<td>제목</td>
+		<tr style="border: 2px solid rgba(255,255,255,0.3);">
+			<td style="border: 1px solid rgba(255,255,255,0.3);">제목</td>
 			<td colspan="3"><%=dto.getTitle()%></td>
 		</tr>
-		<tr>
-			<td>내용</td>
+		<tr style="border: 2px solid rgba(255,255,255,0.3);">
+			<td style="border: 2px solid rgba(255,255,255,0.3);">내용</td>
 			<td colspan="3" height="100"><%=dto.getContent().replaceAll("\r\n", "<br/>")%></td>		
 		</tr>
-		<tr>
-			<td colspan="4" align="center" style="height:35px;">
+		<tr style="border: 2px solid rgba(255,255,255,0.3);">
+			<td colspan="4" align="center" style="height:35px; border-bottom: hidden; border-left: hidden;border-right: hidden;">
 				<%
 				if(session.getAttribute("UserId") != null && session.getAttribute("UserId").toString().equals(dto.getId())){
 				%>
@@ -102,16 +102,16 @@
 
 <%for(int i=0; i<list.size(); i++){ %> 	
 		<tr>
-			<td class="selectReply"><%=list.get(i).getId() %></td>
-			<td class="selectReply" colspan="3"><%=list.get(i).getContent().replaceAll("\r\n", "<br/>")%>
+			<td class="selectReply" style="border: 1px solid rgba(255,255,255,0.3);"><%=list.get(i).getId() %></td>
+			<td class="selectReply" colspan="3" style="border: 1px solid rgba(255,255,255,0.3);"><%=list.get(i).getContent().replaceAll("\r\n", "<br/>")%>
 				<%				
 				for(int j=0; j<ReplyList.size(); j++){	
 					String id_hidden = ReplyList.get(j).getId();
 					if(list.get(i).getDeletePK()==ReplyList.get(j).getSelectPK()){					
 				%>
-					 <div id="reply">ㄴ<%=ReplyList.get(j).getId()%> : <%=ReplyList.get(j).getContent().replaceAll("\r\n", "<br/><a style=\"visibility:hidden;\">ㄴ"+id_hidden+" : </a>")%>
+					 <div id="reply" >ㄴ<%=ReplyList.get(j).getId()%> : <%=ReplyList.get(j).getContent().replaceAll("\r\n", "<br/><a style=\"visibility:hidden;\">ㄴ"+id_hidden+" : </a>")%>
 					 <%if(session.getAttribute("UserId") != null && session.getAttribute("UserId").toString().equals(ReplyList.get(j).getId())){ %>
-					 <a class="del" href="ListModel.li?replyDelete=<%=ReplyList.get(j).getDeletePK()%>&&num=<%=num%>">삭제</a>
+					 <a class="del"  href="ListModel.li?replyDelete=<%=ReplyList.get(j).getDeletePK()%>&&num=<%=num%>" >삭제</a>
 					 <%} %>					 
 					 </div>					 
 				<%}}%>
@@ -130,7 +130,7 @@
 				<a class="cursor" onclick="replyClose(event);">[닫기]</a>
 			</td>	
 			<%if(session.getAttribute("UserId").toString().equals(list.get(i).getId())){ %>
-			<td><a class="del" href="ListModel.li?deletePK=<%=list.get(i).getDeletePK()%>&&num=<%=num%>">삭제</a></td>	
+			<td style="border: 1px solid rgba(255,255,255,0.3);"><a class="del" href="ListModel.li?deletePK=<%=list.get(i).getDeletePK()%>&&num=<%=num%>">삭제</a></td>	
 		<%} %>
 		</tr>
 <%} %></table></div></div>

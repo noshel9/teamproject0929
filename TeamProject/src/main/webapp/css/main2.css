@@ -31,19 +31,32 @@ header{
     top: 0;
     left: 0;
 }
-nav { width: 80%; position: absolute; top: 16px; right: 8px; }
-.menu{float: right;}
-.menu li{float: left;
+nav {
+	width: 80%;
+	position: absolute;
+	top: 16px;
+	right: 8px;
 }
+
+.menu{
+	float: right;
+}
+
+.menu li{
+	
+float: left;
+}
+
 .menu a{
-        color: white;
+        color: #404040;
         padding: 0px 15px;
         display: block;
         font-size: 35px;
+      	text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
 }
 h1{
     font: inherit;
-    color: white;
+    color: ivory;
 }
 .wrapper{
     width: 1170px;

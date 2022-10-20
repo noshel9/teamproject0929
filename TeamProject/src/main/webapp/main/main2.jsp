@@ -54,7 +54,7 @@
                 </form>
                 </c:when>
                 <c:otherwise>
-                	<li style="padding-top:7px; color:white; font-size:25px;"><%=UserId %>님</li> 
+                	<li style="padding-top:7px; color:#404040; font-size:25px; text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;"><%=UserId %>님</li> 
                 	<li><a href="../Member/logoutMember.jsp">로그아웃</a></li>
                 	<li><a href="../Member/updateMember.jsp">회원수정</a>
                     <li><a href="../map.jsp">제보하기</a></li>

@@ -24,7 +24,7 @@
 						<li class="nav-item"><a class="nav-link" href='<c:url value="../Map.map?outputmap=outputmap" />'>편의점 보기</a></li>
 					</c:when>
 					<c:otherwise>
-						<li style="padding-top:7px; color:white;">[<%=UserId %>님]</li>
+						<li style="padding-top:7px; color:ivory;">[<%=UserId %>님]</li>
 						<li class="nav-item"><a class="nav-link" href='<c:url value="../Member/logoutMember.jsp" />'>로그아웃</a></li>
 						<li class="nav-item"><a class="nav-link" href='<c:url value="../Member/updateMember.jsp" />'>회원수정</a></li>
 						<li class="nav-item"><a class="nav-link" href='<c:url value="../map.jsp" />'>편의점 등록</a></li>

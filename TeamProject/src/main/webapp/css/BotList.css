@@ -3,11 +3,12 @@
 @import url("S-Core-Dream-light/s-core-dream.css");
 
 .li_table{
-	border: 3px solid white;
-	margin: auto;
-	width: 796px;
-	border-collapse: collapse;
-	margin-top: 2%;
+	border: 0;
+    margin: auto;
+    width: 60em;
+    border-collapse: collapse;
+    margin-top: 2%;
+    height: 48em;
 	
 }
 
@@ -22,6 +23,8 @@
     font-size: 15px;
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
+    background-color: ivory;
+    color: #404040;
 }
 
 #search2{
@@ -31,6 +34,8 @@
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
     width: 350px;
+    background-color: ivory;
+    color: #404040;
 }
 
 #search3{
@@ -39,12 +44,13 @@
     font-size: 15px;
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
-    background-color: white;
+    background-color: ivory;
     cursor: pointer;
+    color: #404040;
 }
 
 #com_t{
-	height: 42px;
+	height: 35px;
 	width: 796px;
     border-radius: 5px;
     font-size: 15px;
@@ -62,9 +68,10 @@
     font-size: 15px;
     text-align: center;
     font-family: "s-core-dream-bold", sans-serif !important;
-    background-color: white;
+    background-color: ivory;
     cursor: pointer;
 	float: right;
+	color: #404040;
 }
 
 #page{
@@ -75,5 +82,12 @@
 	float: left;
 }
 
+a{
+	text-decoration: none;
+	color: #404040;
+	text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
+}
 
-
+thead{
+  background-color: rgba(255,255,255,0.3);
+}

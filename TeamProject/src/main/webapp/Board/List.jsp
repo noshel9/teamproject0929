@@ -41,9 +41,8 @@ List<BoardDTO> boardLists = (List<BoardDTO>)request.getAttribute("boardLists");
 %>
 <jsp:include page="/menu.jsp"></jsp:include>
     <!-- 검색폼 -->
-    <div class="wrap">
     <div class="container box" id="board_list">
-    <form method="get" name="optionform" >  
+    <form method="get" name="optionform" id="search_form">  
           	  <select name="searchField" id="search1"> 
                 <option value="title">제목</option> 
                 <option value="content">내용</option>
@@ -61,6 +60,7 @@ List<BoardDTO> boardLists = (List<BoardDTO>)request.getAttribute("boardLists");
     <!-- 게시물 목록 테이블(표) -->     
     <table class="table">
         <!-- 각 칼럼의 이름 --> 
+        <thead>
         <tr align="center">
             <th>번호</th>
             <th>제목</th>
@@ -68,6 +68,7 @@ List<BoardDTO> boardLists = (List<BoardDTO>)request.getAttribute("boardLists");
             <th>조회수</th>
             <th>작성일</th>
         </tr>
+        </thead>
         <!-- 목록의 내용 --> 
 <%
 if (boardLists == null || boardLists.size() == 0) {
