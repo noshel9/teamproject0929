@@ -15,6 +15,7 @@
 .search_form{
 	display:flex;
 	justify-content: center;
+	margin-top: 6em;
 }
 
 #search1{
@@ -36,6 +37,7 @@
     width: 350px;
     background-color: ivory;
     color: #404040;
+    width: 500px;
 }
 
 #search3{
@@ -84,6 +86,9 @@
 
 a{
 	text-decoration: none;
+}
+
+td, th{
 	color: #404040;
 	text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
 }

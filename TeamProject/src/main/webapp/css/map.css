@@ -38,30 +38,33 @@ ul{
     font-family: 'Black Han Sans', sans-serif;
 }
 .menu a{
-        color: black;
+	 	color:#404040;
         padding: 0px 15px;
         display: block;
         font-size: 35px;
         clear:both;
+        text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
 }
 nav{
     height: 150px;
-    background-color: none;
+    background-color: ivory;
     border: none;
     position: fixed;
     left: 0;
     width: 100%; 
     top:8px;
-
-
 }
-.board-content{
-	
-}
+
 #menu-nav{
 	top: 50px;
 }
 
 body{
-	margin-top: 150px;
+	margin-top: 125px;
+}
+
+.navi_user{
+	font-size: 2em;
+	color: #404040;
+	 text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
 }

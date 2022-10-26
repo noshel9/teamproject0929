@@ -49,7 +49,7 @@
 </head>
 <body>
 
-<jsp:include page="/Viewmenu.jsp"></jsp:include>
+<jsp:include page="/menu.jsp"></jsp:include>
 
 <div class="view_form">
 <form name="writeFrm">

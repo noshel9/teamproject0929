@@ -21,7 +21,7 @@ header{
 .view_form{
 	display:flex;
 	justify-content: center;
-	margin-top:150px;
+	margin-top:130px;
 }
 
 .view_table{
@@ -74,6 +74,7 @@ header{
 tr{
 	font-family: "s-core-dream-bold", sans-serif !important;
 	margin-bottom : 5px;
+	font-size: 20px
 }
 
 /* th,td { */
@@ -104,14 +105,14 @@ tr{
 }
 
 .del{
-	font-size:15px;
+	font-size:17px;
 	font-family: "s-core-dream-bold", sans-serif !important;
 	text-decoration: none;
 	color: red;
 }
 
 .selectReply{
-	font-size:15px;
+	font-size:17px;
 	font-family: "s-core-dream-bold", sans-serif !important;
 }
 
@@ -174,7 +175,4 @@ li{
 }
 .box{
 	text-align: center;
-}
-.backgroundcolor{
-	background-color:rgba(0, 0, 0, 0.8)
 }
