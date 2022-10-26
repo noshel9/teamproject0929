@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="menu.jsp" />
 <div class="map_wrap">
-    <div id="map" style="width:100%;height:250%;position:relative;overflow:hidden; margin: auto;"></div>
+    <div id="map" style="width:100%;height:272%;position:relative;overflow:hidden; margin: auto;"></div>
     <ul class="" id="category">
         <li id="CS2" data-order="5" onclick="onClickCategory();"> 
             <span class="category_bg store" ></span>

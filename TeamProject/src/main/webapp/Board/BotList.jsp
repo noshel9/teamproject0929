@@ -90,7 +90,7 @@ dao.close();  // DB 연결 닫기 */
                 <option value="id2">내글보기</option>
            	 </select>
            	 <input type="hidden" name="num" value="<%=num%>">
-            <input class="form-control form-control-sm" type="text" name="searchWord" id="search2"/>            
+            <input class="form" type="text" name="searchWord" id="search2"/>            
             <input type="submit" value="검색하기" id="search3" /></div>
     	</div>
     </form>

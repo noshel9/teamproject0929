@@ -53,16 +53,18 @@ nav{
     left: 0;
     width: 100%; 
     top:8px;
-
-
 }
-.board-content{
-	
-}
+
 #menu-nav{
 	top: 50px;
 }
 
 body{
 	margin-top: 125px;
+}
+
+.navi_user{
+	font-size: 2em;
+	color: #404040;
+	 text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
 }

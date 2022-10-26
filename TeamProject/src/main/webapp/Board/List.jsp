@@ -61,7 +61,7 @@ List<BoardDTO> boardLists = (List<BoardDTO>)request.getAttribute("boardLists");
     <table class="table">
         <!-- 각 칼럼의 이름 --> 
         <thead>
-        <tr align="center">
+        <tr align="center" style="height:2.5em;">
             <th>번호</th>
             <th>제목</th>
             <th>작성자</th>

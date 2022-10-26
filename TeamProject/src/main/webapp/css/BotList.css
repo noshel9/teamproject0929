@@ -15,6 +15,7 @@
 .search_form{
 	display:flex;
 	justify-content: center;
+	margin-top: 6em;
 }
 
 #search1{
@@ -36,6 +37,7 @@
     width: 350px;
     background-color: ivory;
     color: #404040;
+    width: 500px;
 }
 
 #search3{

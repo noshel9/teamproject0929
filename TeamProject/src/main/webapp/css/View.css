@@ -74,6 +74,7 @@ header{
 tr{
 	font-family: "s-core-dream-bold", sans-serif !important;
 	margin-bottom : 5px;
+	font-size: 20px
 }
 
 /* th,td { */
@@ -104,14 +105,14 @@ tr{
 }
 
 .del{
-	font-size:15px;
+	font-size:17px;
 	font-family: "s-core-dream-bold", sans-serif !important;
 	text-decoration: none;
 	color: red;
 }
 
 .selectReply{
-	font-size:15px;
+	font-size:17px;
 	font-family: "s-core-dream-bold", sans-serif !important;
 }
 

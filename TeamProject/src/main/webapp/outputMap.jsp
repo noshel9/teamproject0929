@@ -16,7 +16,7 @@
 <body>
 <jsp:include page="menu.jsp" />
 <!-- 지도를 표시할 div 입니다 -->
-<div id="map" style="width:100%;height:94%;"></div>
+<div id="map" style="width:100%;height:100%;"></div>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=def47418c26c1b2e8383afc08b8370c5&libraries=services,drawing,clusterer"></script>
 
