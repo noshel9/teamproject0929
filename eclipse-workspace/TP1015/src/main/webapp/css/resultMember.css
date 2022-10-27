@@ -1,0 +1,12 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+@import url("S-Core-Dream-light/s-core-dream.css");
+body{
+   background: linear-gradient(#f2b2b2, #c8ccf2);
+   background-size: cover;
+   height: 97.1vh;
+}
+
+.container{
+	font-family: "s-core-dream-bold", sans-serif !important;
+}

@@ -1,0 +1,81 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+@import url("S-Core-Dream-light/s-core-dream.css");
+
+.li_table{
+	border: 3px solid white;
+	margin: auto;
+	width: 796px;
+	border-collapse: collapse;
+	margin-top: 2%;
+	
+}
+
+.search_form{
+	display:flex;
+	justify-content: center;
+}
+
+#search1{
+	height: 36px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-family: "s-core-dream-bold", sans-serif !important;
+}
+
+#search2{
+	height: 30px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-family: "s-core-dream-bold", sans-serif !important;
+    width: 350px;
+}
+
+#search3{
+	height: 36px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-family: "s-core-dream-bold", sans-serif !important;
+    background-color: white;
+    cursor: pointer;
+}
+
+#com_t{
+	height: 42px;
+	width: 796px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-family: "s-core-dream-bold", sans-serif !important;
+    cursor: pointer;
+    background: none;
+    margin: auto;
+    border: none;
+}
+
+.com_btn{
+	height: 36px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-family: "s-core-dream-bold", sans-serif !important;
+    background-color: white;
+    cursor: pointer;
+	float: right;
+}
+
+#page{
+	text-align: center;
+}
+
+.pagination li{
+	float: left;
+}
+
+a{
+	text-decoration: none;
+}
+
