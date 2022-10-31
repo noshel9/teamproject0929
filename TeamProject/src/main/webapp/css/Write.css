@@ -44,7 +44,7 @@ header{
 
 .InputBox{
 	padding: 1% 20%; 
-	margin-top: 15%;
+	margin-top: 30%;
 	flex: 0 1 auto;
 }
 
@@ -54,8 +54,8 @@ header{
 	
 }
 .write_form{
-/* 	display: flex; */
-/*     justify-content: center; */
+ 	display: flex; 
+     justify-content: center; 
     font-family: "s-core-dream-bold", sans-serif !important;
 }
 .table_rule{

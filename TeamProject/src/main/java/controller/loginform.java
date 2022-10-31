@@ -28,7 +28,7 @@ public class loginform extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-	
+		request.setCharacterEncoding("utf-8");
 //		loginAction.getRequestDispatcher("/member.loginMeber.jsp").forward(request, response);
 		
 		if(request.getParameter("log") != null) {
