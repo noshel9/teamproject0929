@@ -124,4 +124,18 @@ h6{
 	font-size: 5em;
 	color: #404040;
     text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+    padding-bottom : 1em;
+}
+
+#m1,#m2{
+	width : 85vh;
+}
+#hi{
+	font-size: 45px;
+	   color: #404040;
+    text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
+    font-weight: 100;
+}
+#title1{
+	padding-bottom: 0.5em;
 }

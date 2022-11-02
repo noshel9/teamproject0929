@@ -54,7 +54,7 @@
                 </form>
                 </c:when>
                 <c:otherwise>
-                	<li style="padding-top:7px; color:white; font-size:25px;"><%=UserId %>님</li> 
+                	<li style="padding-top:7px; color:#404040; font-size:25px; text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 0.5px 0.5px #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;"><%=UserId %>님</li> 
                 	<li><a href="../Member/logoutMember.jsp">로그아웃</a></li>
                 	<li><a href="../Member/updateMember.jsp">회원수정</a>
                     <li><a href="../map.jsp">제보하기</a></li>
@@ -72,13 +72,24 @@
         <div class="section" id="section0"><h1>오늘의<br/>편케팅!</h1></div>
         <div class="section" id="section1">
             <div class="slide" id="slide1"><h1>오늘의 편케팅 소개입니다.</h1></div>
-            <div class="slide" id="slide2"><h1>편케팅 소개 2</h1></div>
+            <div class="slide" id="slide2"><h1 id="title1">편케팅 소개 </h1>
+            <div id="hi"><p>'오늘의 편케팅!'은 코로나 백신 예약 대란으로 인해 <br/>
+							카카오맵과 네이버 지도에서 잔여 백신 예약이 가능하도록 <br/>
+							서비스했던 것에서 착안하여 '오늘의 편케팅!'을 개발하게 되었습니다.
+						<br/>편케팅이란 ‘편의점’과 ‘티켓팅’의 합성어로 편의점 인기제품을<br/> 
+							게임같은 형식으로 구입하며 즐길 수 있게 초점을 맞춘 프로젝트 입니다</p></div>
+            </div>
+            
         </div>
         <div class="section" id="section2">
             <div class="intro">
                 <h1 class="member_title">팀원 소개</h1>
-                <p>팀원 1 2 3 4</p>
-            </div>
+             </div>
+             <div id="m_intro">
+             <img id="m1" alt="" src="../imgs/m_2.png">
+             <img id="m2" alt="" src="../imgs/m_1.png">
+             
+        	</div>
         </div>
     <script type="text/javascript" src="fullpage.js"></script>
     
